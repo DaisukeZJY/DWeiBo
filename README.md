@@ -11,4 +11,5 @@ SwiftForWeibo
 
 > 欢迎转载，但是请注明出处，劳动成果来之不易。
 
-详情的文章介绍点击这里[MyWeiBoProjectForSwift]http://daisuke.cn/2016/10/27/MyWeiBoProjectForSwift/
+详情的文章介绍点击这里
+[MyWeiBoProjectForSwift]http://daisuke.cn/2016/10/27/MyWeiBoProjectForSwift/
