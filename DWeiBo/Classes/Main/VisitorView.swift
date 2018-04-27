@@ -24,6 +24,40 @@ class VisitorView: UIView {
     // 一定要加上weak，避免循环引用
     weak var delegate: VisitorViewDelegate?
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        // 添加子控件
+        addSubview(iconView)
+        addSubview(maskBGView)
+        addSubview(homeIcon)
+        addSubview(messageLabel)
+        addSubview(loginBtn)
+        addSubview(registerBtn)
+        
+        // 布局
+        iconView.xmg_AlignInner(type: XMG_AlignType.center, referView: self, size: nil)
+        homeIcon.xmg_AlignInner(type: XMG_AlignType.center, referView: self, size: nil)
+        messageLabel.xmg_AlignVertical(type: XMG_AlignType.bottomCenter, referView: iconView, size: nil)
+        
+        let widthCons = NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: 224)
+        addConstraint(widthCons)
+        
+        registerBtn.xmg_AlignVertical(type: XMG_AlignType.bottomLeft, referView: messageLabel, size: CGSize(width: 100, height: 30), offset: CGPoint(x: 0, y: 20))
+        
+        loginBtn.xmg_AlignVertical(type: XMG_AlignType.bottomRight, referView: messageLabel, size: CGSize(width: 100, height: 30), offset: CGPoint(x: 0, y: 20))
+        
+        maskBGView.xmg_Fill(self)
+        
+    }
+    
+    // Swift推荐我们自定义一个空间，要么用纯代码，要么使用xib/stroyboard
+    required init?(coder aDecoder: NSCoder) {
+        // 如果用过xib/stroyboard创建该类，那么就会崩溃
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     
     /// 设置未登录界面
     ///
@@ -62,7 +96,6 @@ class VisitorView: UIView {
         iconView.layer.add(anim, forKey: nil)
         
     }
-    
     
     // MARK - 懒加载控件
     // 转盘
@@ -108,7 +141,10 @@ class VisitorView: UIView {
         return registerBtn
     }()
     
-    
+    fileprivate lazy var maskBGView: UIImageView = {
+        let view = UIImageView(image: UIImage(named: "visitordiscover_feed_mask_smallicon"))
+        return view
+    }()
     
     /// 点击登录按钮
     func loginBtnClick(){
@@ -122,11 +158,5 @@ class VisitorView: UIView {
         print(#function)
         delegate?.registerBtnWillClick()
     }
-    
-    
-    
-    
-    
-    
 
 }

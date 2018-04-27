@@ -8,29 +8,53 @@
 
 import UIKit
 
-class HomeTableViewController: UITableViewController {
+class HomeTableViewController: BaseViewController {
 
     lazy var statuseFrames = NSArray();
-    
-    // 顶部刷新
-//    let header = MJRefreshNormalHeader()
-    
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 加载继承刷新
-        self.setupRefreshStatuse();
+        // 如果没有登录，就设置未登录界面的信息
+        if !userLogin {
+            visitorView?.setupVisitorInfo(true, imageName: "visitordiscover_feed_image_house", message: "关注一些人，回这里看看有什么惊喜")
+            return
+        }
+        
+        // 初始化导航条
+        setupNav()
     }
 
-    func setupRefreshStatuse() {
-        let head:UIRefreshControl = UIRefreshControl.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: 150))
-        head.tintColor = UIColor.black;
-        head.attributedTitle = NSAttributedString.init(string: "下拉刷新")
-        self.tableView.addSubview(head)
+    func setupNav() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem.createBarButtonItem("navigationbar_friendattention", target: self, action: #selector(leftItemClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem.createBarButtonItem("navigationbar_pop", target: self, action: #selector(rightItemClick))
         
+        let titleBtn = UIButton()
+        titleBtn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
+        titleBtn.setImage(UIImage(named: "navigationbar_arrow_down"), for: UIControlState.normal)
+        titleBtn.setImage(UIImage(named: "navigationbar_arrow_up"), for: UIControlState.selected)
+        titleBtn.setTitle(" WeiBo", for: UIControlState.normal)
+        titleBtn.addTarget(self, action: #selector(titleItemClick(_:)), for: UIControlEvents.touchUpInside)
+        titleBtn.sizeToFit()
+        navigationItem.titleView = titleBtn
+    }
+    
+    func leftItemClick()
+    {
+        print(#function)
+    }
+    
+    func rightItemClick()
+    {
+        print(#function)
+    }
+    
+    func titleItemClick(_ btn:UIButton)
+    {
+        btn.isSelected = !btn.isSelected
+        print(#function)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

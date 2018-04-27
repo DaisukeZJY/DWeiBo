@@ -8,17 +8,38 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UITableViewController, VisitorViewDelegate {
+    func loginBtnWillClick() {
+        print(#function)
+    }
+    
+    func registerBtnWillClick() {
+        print(#function)
+    }
+    
     
     // 定义一个变量保存用户当前是否是登录
     var userLogin = true
     
     // 定义属性保存未登录界面
-    var visitorView: UIView?
+    var visitorView: VisitorView?
+    
+    override func loadView() {
+        userLogin ? super.loadView() : setupVisitorView()
+    }
+    
+    fileprivate func setupVisitorView(){
+        // 初始化未登录界面
+        let visitorView = VisitorView()
+        visitorView.delegate = self
+        view = visitorView
+        
+        // 设置导航条未登录按钮
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.registerBtnWillClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.loginBtnWillClick))
+    }
     
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,7 +51,6 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

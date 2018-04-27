@@ -61,7 +61,7 @@ class MainViewController: UITabBarController {
             
             do {
                 // 有可能异常代码放在这里
-                // 序列化json数据 -- 》 Array
+                // 序列化json数据 --> Array
                 // try: 发生异常会跳到catch中继续执行
                 // try!: 发生过异常程序直接崩溃
                 let dicArr = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.mutableContainers)
@@ -127,8 +127,6 @@ class MainViewController: UITabBarController {
         
         // 将导航器添加到当前控制器
         addChildViewController(navController)
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
