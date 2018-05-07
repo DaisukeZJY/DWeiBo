@@ -68,9 +68,9 @@
 		7EC1B7051DC1A86B00D39997 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		7EC1B7081DC1ACDC00D39997 /* NullViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullViewController.swift; sourceTree = "<group>"; };
 		7EC1B70A1DC1AD0B00D39997 /* MainVCSetting.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MainVCSetting.json; sourceTree = "<group>"; };
+		7ED8248E20A04C25001FE12D /* DWeibo-Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DWeibo-Bridge.h"; sourceTree = "<group>"; };
 		7EDA0D6F2092CD18009A8CEC /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		7EDA0D772092D75F009A8CEC /* UIBarButtonItem+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Category.swift"; sourceTree = "<group>"; };
-		7EDA0D7920932700009A8CEC /* DWeibo-Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DWeibo-Bridge.h"; sourceTree = "<group>"; };
 		7EDC452E1DC8918A002F256D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EDC45301DC89264002F256D /* VisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
 		7F7620D8C5FC37AAD0DD67FE /* Pods-DWeiBo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DWeiBo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 				7EC1B6C91DC1A5F400D39997 /* ViewController.swift */,
 				7EC1B6CE1DC1A5F400D39997 /* Assets.xcassets */,
 				7EC1B6D01DC1A5F400D39997 /* LaunchScreen.storyboard */,
-				7EDA0D7920932700009A8CEC /* DWeibo-Bridge.h */,
+				7ED8248E20A04C25001FE12D /* DWeibo-Bridge.h */,
 				7EC1B6D31DC1A5F400D39997 /* Info.plist */,
 			);
 			path = DWeiBo;
