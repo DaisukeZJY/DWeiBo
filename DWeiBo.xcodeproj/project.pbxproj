@@ -49,7 +49,6 @@
 		0BF49B965CA34AE533BC3AE1 /* Pods_DWeiBoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DWeiBoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A23DBFD60DA5BF70604A33E /* Pods-DWeiBo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DWeiBo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo.debug.xcconfig"; sourceTree = "<group>"; };
 		69F92004D276B664EB3AE838 /* Pods_DWeiBoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DWeiBoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E070708206B8E1500799639 /* SwiftBridgingHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftBridgingHead.h; sourceTree = "<group>"; };
 		7EC1B6C41DC1A5F400D39997 /* DWeiBo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DWeiBo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC1B6C71DC1A5F400D39997 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC1B6C91DC1A5F400D39997 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +70,7 @@
 		7EC1B70A1DC1AD0B00D39997 /* MainVCSetting.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MainVCSetting.json; sourceTree = "<group>"; };
 		7EDA0D6F2092CD18009A8CEC /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		7EDA0D772092D75F009A8CEC /* UIBarButtonItem+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Category.swift"; sourceTree = "<group>"; };
+		7EDA0D7920932700009A8CEC /* DWeibo-Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DWeibo-Bridge.h"; sourceTree = "<group>"; };
 		7EDC452E1DC8918A002F256D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EDC45301DC89264002F256D /* VisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
 		7F7620D8C5FC37AAD0DD67FE /* Pods-DWeiBo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DWeiBo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +132,7 @@
 				7EC1B6C91DC1A5F400D39997 /* ViewController.swift */,
 				7EC1B6CE1DC1A5F400D39997 /* Assets.xcassets */,
 				7EC1B6D01DC1A5F400D39997 /* LaunchScreen.storyboard */,
+				7EDA0D7920932700009A8CEC /* DWeibo-Bridge.h */,
 				7EC1B6D31DC1A5F400D39997 /* Info.plist */,
 			);
 			path = DWeiBo;
@@ -224,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				7EDA0D6F2092CD18009A8CEC /* UIView+AutoLayout.swift */,
-				7E070708206B8E1500799639 /* SwiftBridgingHead.h */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -272,12 +272,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EC1B6EC1DC1A5F400D39997 /* Build configuration list for PBXNativeTarget "DWeiBo" */;
 			buildPhases = (
+				33F2C38CD16A73BDAC3D90EE /* [CP] Check Pods Manifest.lock */,
 				9D32B207E65A26F369174015 /* 📦 Check Pods Manifest.lock */,
 				7EC1B6C01DC1A5F400D39997 /* Sources */,
 				7EC1B6C11DC1A5F400D39997 /* Frameworks */,
 				7EC1B6C21DC1A5F400D39997 /* Resources */,
 				1220A52341DEDFCE47237F84 /* 📦 Embed Pods Frameworks */,
-				4A4529B5A2023AF813A8A631 /* 📦 Copy Pods Resources */,
+				3C4C0C3F11CD84EC07FEA29B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -413,19 +414,46 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4A4529B5A2023AF813A8A631 /* 📦 Copy Pods Resources */ = {
+		33F2C38CD16A73BDAC3D90EE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DWeiBo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3C4C0C3F11CD84EC07FEA29B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9D32B207E65A26F369174015 /* 📦 Check Pods Manifest.lock */ = {
@@ -607,10 +635,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DWeiBo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.DaiSuke.DWeiBo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/DaiSuke/Desktop/MyGitHubProject/DWeiBo/DWeiBo/Classes/Tools/SwiftBridgingHead.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/DaiSuke/Desktop/MyGitHubProject/DWeiBo/DWeiBo/DWeibo-Bridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -621,10 +650,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DWeiBo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.DaiSuke.DWeiBo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/DaiSuke/Desktop/MyGitHubProject/DWeiBo/DWeiBo/Classes/Tools/SwiftBridgingHead.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/DaiSuke/Desktop/MyGitHubProject/DWeiBo/DWeiBo/DWeibo-Bridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -665,6 +695,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.DaiSuke.DWeiBoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DWeiBo/DWeibo-Bridge.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = DWeiBo;
 			};
@@ -678,6 +709,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.DaiSuke.DWeiBoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DWeiBo/DWeibo-Bridge.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = DWeiBo;
 			};
