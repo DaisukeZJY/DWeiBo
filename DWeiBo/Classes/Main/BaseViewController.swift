@@ -11,6 +11,12 @@ import UIKit
 class BaseViewController: UITableViewController, VisitorViewDelegate {
     func loginBtnWillClick() {
         print(#function)
+        // 弹出登录界面
+        let vc = OAuthViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true, completion: nil)
+        
+        
     }
     
     func registerBtnWillClick() {
@@ -19,7 +25,7 @@ class BaseViewController: UITableViewController, VisitorViewDelegate {
     
     
     // 定义一个变量保存用户当前是否是登录
-    var userLogin = true
+    var userLogin = false
     
     // 定义属性保存未登录界面
     var visitorView: VisitorView?

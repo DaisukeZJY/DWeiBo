@@ -8,4 +8,5 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <AFNetworking/AFNetworking.h>
 
