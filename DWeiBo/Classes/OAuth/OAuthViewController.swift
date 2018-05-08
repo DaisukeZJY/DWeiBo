@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class OAuthViewController: UIViewController {
 
@@ -69,12 +70,25 @@ extension OAuthViewController: UIWebViewDelegate{
             
             // 利用已经授权的RequestToken换取AccessToken
             loadAccessToken(code: code)
+        } else {
+            close()
         }
         
         
         return false
     }
     
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        SVProgressHUD.show(withStatus: "正在加载...")
+        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        SVProgressHUD.dismiss()
+    }
+    
+    
+    // MARK: - 自定方法
     /// 换取AccessToken
     private func loadAccessToken(code:String) {
         // 定义路径
@@ -86,9 +100,28 @@ extension OAuthViewController: UIWebViewDelegate{
             
         }, success: { (_, json) in
             print(json as Any)
+            /*
+             字典转模型
+             plist：特点只能存储系统自带的数据类型
+             将对象转化为json之后写入文件中
+             偏好设置：本质plist
+             归档：可以存储自定义对象
+             数据库：用于存储大数据，特点效率高
+             */
             let user = UserAccount(dict: json as! [String : AnyObject])
             print(user)
-            
+            user.loadUserInfo(finishBlock: { (account, error) in
+                if account != nil {
+                    account!.saveAccount()
+                    SVProgressHUD.dismiss()
+                    return;
+                }
+                SVProgressHUD.show(withStatus: "网络不给力")
+                SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
+            })
+            // 由于加载用户信息是异步的，所以不能在这里保存
+//            // 归档模型
+//            user.saveAccount()
             
         }) { (_, error) in
             print(error)
