@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		666D135BBECA564A2D116B61 /* Pods_DWeiBo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0791998FA4302DCC0309F5CA /* Pods_DWeiBo.framework */; };
 		7E0D043C20A18582004B69F3 /* NewFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D043B20A18582004B69F3 /* NewFeatureViewController.swift */; };
+		7E0D043E20A1A1A2004B69F3 /* WelcomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */; };
 		7E1294C520A145E80044F6F1 /* String+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1294C420A145E80044F6F1 /* String+Category.swift */; };
 		7EC1B6C81DC1A5F400D39997 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1B6C71DC1A5F400D39997 /* AppDelegate.swift */; };
 		7EC1B6CA1DC1A5F400D39997 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1B6C91DC1A5F400D39997 /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 		1A23DBFD60DA5BF70604A33E /* Pods-DWeiBo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DWeiBo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo.debug.xcconfig"; sourceTree = "<group>"; };
 		69F92004D276B664EB3AE838 /* Pods_DWeiBoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DWeiBoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E0D043B20A18582004B69F3 /* NewFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeatureViewController.swift; sourceTree = "<group>"; };
+		7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomViewController.swift; sourceTree = "<group>"; };
 		7E1294C420A145E80044F6F1 /* String+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Category.swift"; sourceTree = "<group>"; };
 		7EC1B6C41DC1A5F400D39997 /* DWeiBo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DWeiBo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC1B6C71DC1A5F400D39997 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				7E0D043B20A18582004B69F3 /* NewFeatureViewController.swift */,
+				7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */,
 			);
 			path = NewFeature;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				7EDA0D702092CD18009A8CEC /* UIView+AutoLayout.swift in Sources */,
 				7EC1B6C81DC1A5F400D39997 /* AppDelegate.swift in Sources */,
 				7ED8249520A05C29001FE12D /* UserAccount.swift in Sources */,
+				7E0D043E20A1A1A2004B69F3 /* WelcomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -117,6 +117,7 @@ private class NewFeatureCell: UICollectionViewCell {
     
     func clickStartBtn() {
         print("clickStartBtn")
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kSwitchRootViewControllerKey), object: true)
     }
     
     private lazy var iconView: UIImageView = {

@@ -8,21 +8,67 @@
 
 import UIKit
 
+/// 切换控制器通知
+let kSwitchRootViewControllerKey = "kSwitchRootViewControllerKey"
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func isNewUpdate() -> Bool {
+        // 获取当前版本信息
+        let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        let version = NumberFormatter().number(from: currentVersion)?.doubleValue ?? 0
+        
+        // 获取沙盒版本信息
+        let versionKey = "versionKey"
+        let sandboxVersion = UserDefaults.standard.double(forKey: versionKey)
+        
+        // 保存当前版本
+        UserDefaults.standard.set(version, forKey: versionKey)
+        return version > sandboxVersion
+    }
+    
+    private func defaultController() -> UIViewController{
+        // 判断用户是否登录
+        if UserAccount.userLogin() {
+            return isNewUpdate() ? NewFeatureViewController() : WelcomViewController()
+        }
+        return MainViewController()
+    }
+    
+    func switchRootViewController(notify:Notification) {
+        if notify.object as! Bool {
+            window?.rootViewController = MainViewController()
+        } else {
+            window?.rootViewController = WelcomViewController()
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // 注册通知
+        NotificationCenter.default.addObserver(self, selector: #selector(switchRootViewController(notify:)), name: NSNotification.Name(rawValue: kSwitchRootViewControllerKey), object: nil)
+        
+        // 设置导航条和工具条的外观
+        // 因为外观一旦设置全局有效, 所以应该在程序一进来就设置
+        UINavigationBar.appearance().tintColor = UIColor.orange
+        UITabBar.appearance().tintColor = UIColor.orange
         
         // 创建window
         window = UIWindow(frame:UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
         // 创建根控制器
 //        window?.rootViewController = MainViewController()
-        window?.rootViewController = NewFeatureViewController()
+//        window?.rootViewController = NewFeatureViewController()
+        window?.rootViewController = defaultController()
         window?.makeKeyAndVisible()
         
         

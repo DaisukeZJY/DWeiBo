@@ -114,6 +114,7 @@ extension OAuthViewController: UIWebViewDelegate{
                 if account != nil {
                     account!.saveAccount()
                     SVProgressHUD.dismiss()
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: kSwitchRootViewControllerKey), object: false)
                     return;
                 }
                 SVProgressHUD.show(withStatus: "网络不给力")
