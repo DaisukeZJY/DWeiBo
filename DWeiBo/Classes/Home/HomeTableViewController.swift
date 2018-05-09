@@ -9,11 +9,20 @@
 import UIKit
 import SVProgressHUD
 
+// cell的标志
+let kHomeCellReuseIdentifier = "kHomeCellReuseIdentifier"
+
 class HomeTableViewController: BaseViewController {
 
     lazy var statuseFrames = NSArray();
     
-    
+    // 保存微博数组
+    var statuses: [Status]? {
+        didSet{
+            // 设置数据完毕，刷新表格
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +35,12 @@ class HomeTableViewController: BaseViewController {
         
         // 初始化导航条
         setupNav()
+        
+        // 注册cell
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: kHomeCellReuseIdentifier)
+        
+        // 加载数据
+        loadData()
     }
 
     func setupNav() {
@@ -41,6 +56,17 @@ class HomeTableViewController: BaseViewController {
         titleBtn.sizeToFit()
         navigationItem.titleView = titleBtn
     }
+    
+    /// 加载数据
+    func loadData() {
+        Status.loadStatuses { (models, error) in
+            if error != nil {
+                return
+            }
+            self.statuses = models
+        }
+    }
+    
     
     func leftItemClick()
     {
@@ -58,16 +84,28 @@ class HomeTableViewController: BaseViewController {
         print(#function)
     }
 
+    
+}
+
+
+extension HomeTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return statuses?.count ?? 0
     }
-
     
-
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: kHomeCellReuseIdentifier, for: indexPath)
+        if statuses!.count > indexPath.row {
+            let status = statuses![indexPath.row]
+            cell.textLabel?.text = status.text
+        }
+        return cell
+    }
 }
+
