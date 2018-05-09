@@ -37,7 +37,10 @@ class HomeTableViewController: BaseViewController {
         setupNav()
         
         // 注册cell
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: kHomeCellReuseIdentifier)
+        tableView.register(StatusTableViewCell.self, forCellReuseIdentifier: kHomeCellReuseIdentifier)
+        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         // 加载数据
         loadData()
@@ -100,10 +103,11 @@ extension HomeTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kHomeCellReuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: kHomeCellReuseIdentifier, for: indexPath) as! StatusTableViewCell
         if statuses!.count > indexPath.row {
             let status = statuses![indexPath.row]
-            cell.textLabel?.text = status.text
+//            cell.textLabel?.text = status.text
+            cell.status = status
         }
         return cell
     }
