@@ -71,10 +71,15 @@ class StatusTableViewCell: UITableViewCell {
     private lazy var verifiedView: UIImageView = UIImageView(image: UIImage(named: "avatar_enterprise_vip"))
     
     // 昵称
+//    private lazy var nameLabel: UILabel = {
+//        let name = UILabel()
+//        name.textColor = UIColor.darkGray
+//        name.font = UIFont.systemFont(ofSize: 14)
+//        return name
+//    }()
+    
     private lazy var nameLabel: UILabel = {
-        let name = UILabel()
-        name.textColor = UIColor.darkGray
-        name.font = UIFont.systemFont(ofSize: 14)
+        let name = UILabel.createLabel(color: UIColor.darkGray, fontSize: 14)
         return name
     }()
     
@@ -83,26 +88,26 @@ class StatusTableViewCell: UITableViewCell {
     
     // 时间
     private lazy var timeLabel: UILabel = {
-        let time = UILabel()
-        time.textColor = UIColor.darkGray
-        time.font = UIFont.systemFont(ofSize: 14)
+        let time = UILabel.createLabel(color: UIColor.darkGray, fontSize: 14)
+//        time.textColor = UIColor.darkGray
+//        time.font = UIFont.systemFont(ofSize: 14)
         return time
     }()
     
     // 来源
     private lazy var sourceLabel: UILabel = {
-        let source = UILabel()
-        source.textColor = UIColor.darkGray
-        source.font = UIFont.systemFont(ofSize: 14)
+        let source = UILabel.createLabel(color: UIColor.darkGray, fontSize: 14)
+//        source.textColor = UIColor.darkGray
+//        source.font = UIFont.systemFont(ofSize: 14)
         return source
     }()
     
     // 正文
     private lazy var contentLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel.createLabel(color: UIColor.darkGray, fontSize: 15)
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = UIColor.darkGray
+//        label.font = UIFont.systemFont(ofSize: 15)
+//        label.textColor = UIColor.darkGray
         label.preferredMaxLayoutWidth = UIScreen.main.bounds.width - 20
         return label
     }()
@@ -135,38 +140,42 @@ class StatusFooterView: UIView {
     
     // MARK: - 懒加载
     private lazy var retweetBtn: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "timeline_icon_retweet"), for: UIControlState.normal)
-        btn.setTitle("转发", for: UIControlState.normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 10)
-        btn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
-        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
-        btn.setBackgroundImage(UIImage(named: "timeline_card_bottom_background"), for: UIControlState.normal)
+        let btn = UIButton.createButton(imageName: "timeline_icon_retweet", title: "转发")
+//        btn.setImage(UIImage(named: "timeline_icon_retweet"), for: UIControlState.normal)
+//        btn.setTitle("转发", for: UIControlState.normal)
+//        btn.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+//        btn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
+//        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+//        btn.setBackgroundImage(UIImage(named: "timeline_card_bottom_background"), for: UIControlState.normal)
         return btn
     }()
     
     private lazy var unLikeBtn: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "timeline_icon_unlike"), for: UIControlState.normal)
-        btn.setTitle("赞", for: UIControlState.normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 10)
-        btn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
-        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
-        btn.setBackgroundImage(UIImage(named: "timeline_card_bottom_background"), for: UIControlState.normal)
+        let btn = UIButton.createButton(imageName: "timeline_icon_unlike", title: "赞")
+//        btn.setImage(UIImage(named: "timeline_icon_unlike"), for: UIControlState.normal)
+//        btn.setTitle("赞", for: UIControlState.normal)
+//        btn.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+//        btn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
+//        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+//        btn.setBackgroundImage(UIImage(named: "timeline_card_bottom_background"), for: UIControlState.normal)
         return btn
     }()
+    
+//    private lazy var commonBtn: UIButton = {
+//        let btn = UIButton()
+//        btn.setImage(UIImage(named: "timeline_icon_comment"), for: UIControlState.normal)
+//        btn.setTitle("评论", for: UIControlState.normal)
+//        btn.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+//        btn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
+//        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+//        btn.setBackgroundImage(UIImage(named: "timeline_card_bottom_background"), for: UIControlState.normal)
+//        return btn
+//    }()
     
     private lazy var commonBtn: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "timeline_icon_comment"), for: UIControlState.normal)
-        btn.setTitle("评论", for: UIControlState.normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 10)
-        btn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
-        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
-        btn.setBackgroundImage(UIImage(named: "timeline_card_bottom_background"), for: UIControlState.normal)
+        let btn = UIButton.createButton(imageName: "timeline_icon_comment", title: "评论")
         return btn
     }()
-    
 }
 
 
