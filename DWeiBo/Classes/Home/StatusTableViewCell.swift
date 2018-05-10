@@ -14,12 +14,18 @@ class StatusTableViewCell: UITableViewCell {
     var status:Status? {
         didSet{
             nameLabel.text = status?.user?.name
-//            timeLabel.text = status?.created_at
-//            sourceLabel.text = status?.source
-            timeLabel.text = "刚刚"
-            sourceLabel.text = "来自：daisuke"
+            timeLabel.text = status?.created_at
+            sourceLabel.text = status?.source
+//            timeLabel.text = "刚刚"
+//            sourceLabel.text = "来自：daisuke"
             contentLabel.text = status?.text
-            iconView.sd_setImage(with: URL(string: (status?.user?.profile_image_url)!))
+            if let url = status?.user?.profile_image_url {
+                iconView.sd_setImage(with: URL(string: url))
+            }
+            
+            // 设置会员图标
+            verifiedView.image = status?.user?.verifiedImage
+            vipView.image = status?.user?.mbrankImage
         }
     }
     
@@ -78,29 +84,16 @@ class StatusTableViewCell: UITableViewCell {
 //        return name
 //    }()
     
-    private lazy var nameLabel: UILabel = {
-        let name = UILabel.createLabel(color: UIColor.darkGray, fontSize: 14)
-        return name
-    }()
+    private lazy var nameLabel: UILabel = UILabel.createLabel(color: UIColor.darkGray, fontSize: 14)
     
     // 会员图标
     private lazy var vipView: UIImageView = UIImageView(image: UIImage(named: "common_icon_membership"))
     
     // 时间
-    private lazy var timeLabel: UILabel = {
-        let time = UILabel.createLabel(color: UIColor.darkGray, fontSize: 14)
-//        time.textColor = UIColor.darkGray
-//        time.font = UIFont.systemFont(ofSize: 14)
-        return time
-    }()
+    private lazy var timeLabel: UILabel = UILabel.createLabel(color: UIColor.darkGray, fontSize: 14)
     
     // 来源
-    private lazy var sourceLabel: UILabel = {
-        let source = UILabel.createLabel(color: UIColor.darkGray, fontSize: 14)
-//        source.textColor = UIColor.darkGray
-//        source.font = UIFont.systemFont(ofSize: 14)
-        return source
-    }()
+    private lazy var sourceLabel: UILabel = UILabel.createLabel(color: UIColor.darkGray, fontSize: 14)
     
     // 正文
     private lazy var contentLabel: UILabel = {
@@ -139,27 +132,9 @@ class StatusFooterView: UIView {
     }
     
     // MARK: - 懒加载
-    private lazy var retweetBtn: UIButton = {
-        let btn = UIButton.createButton(imageName: "timeline_icon_retweet", title: "转发")
-//        btn.setImage(UIImage(named: "timeline_icon_retweet"), for: UIControlState.normal)
-//        btn.setTitle("转发", for: UIControlState.normal)
-//        btn.titleLabel?.font = UIFont.systemFont(ofSize: 10)
-//        btn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
-//        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
-//        btn.setBackgroundImage(UIImage(named: "timeline_card_bottom_background"), for: UIControlState.normal)
-        return btn
-    }()
+    private lazy var retweetBtn: UIButton = UIButton.createButton(imageName: "timeline_icon_retweet", title: "转发")
     
-    private lazy var unLikeBtn: UIButton = {
-        let btn = UIButton.createButton(imageName: "timeline_icon_unlike", title: "赞")
-//        btn.setImage(UIImage(named: "timeline_icon_unlike"), for: UIControlState.normal)
-//        btn.setTitle("赞", for: UIControlState.normal)
-//        btn.titleLabel?.font = UIFont.systemFont(ofSize: 10)
-//        btn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
-//        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
-//        btn.setBackgroundImage(UIImage(named: "timeline_card_bottom_background"), for: UIControlState.normal)
-        return btn
-    }()
+    private lazy var unLikeBtn: UIButton = UIButton.createButton(imageName: "timeline_icon_unlike", title: "赞")
     
 //    private lazy var commonBtn: UIButton = {
 //        let btn = UIButton()
@@ -172,10 +147,7 @@ class StatusFooterView: UIView {
 //        return btn
 //    }()
     
-    private lazy var commonBtn: UIButton = {
-        let btn = UIButton.createButton(imageName: "timeline_icon_comment", title: "评论")
-        return btn
-    }()
+    private lazy var commonBtn: UIButton = UIButton.createButton(imageName: "timeline_icon_comment", title: "评论")
 }
 
 

@@ -11,13 +11,30 @@ import UIKit
 class Status: NSObject {
     
     /// 微博创建时间
-    var created_at:String?
+    var created_at:String? {
+        didSet{
+            let date = NSDate.dateWithString(time: created_at!)
+            created_at = date.descDate
+        }
+    }
     /// 微博ID
     var id:Int?
     /// 微博信息内容
     var text:String?
     /// 微博来源
-    var source:String?
+    var source:String? {
+        didSet{
+            // <a href=\"http://app.weibo.com/t/feed/4fuyNj\" rel=\"nofollow\">即刻笔记</a>
+            // 截取字符串
+            if let str = source {
+                // 获取开始截取的位置
+                let startLocation = (str as NSString).range(of: ">").location+1
+                // 获取截取的长度
+                let length = (str as NSString).range(of: "<", options: NSString.CompareOptions.backwards).location - startLocation
+                source = "来自:"+(str as NSString).substring(with: NSRange(location: startLocation, length: length))
+            }
+        }
+    }
     /// 配图数组
     var pic_urls: [[String:AnyObject]]?
     
