@@ -27,6 +27,9 @@ class Status: NSObject {
             // <a href=\"http://app.weibo.com/t/feed/4fuyNj\" rel=\"nofollow\">即刻笔记</a>
             // 截取字符串
             if let str = source {
+                if str == "" {
+                    return
+                }
                 // 获取开始截取的位置
                 let startLocation = (str as NSString).range(of: ">").location+1
                 // 获取截取的长度

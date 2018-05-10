@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		666D135BBECA564A2D116B61 /* Pods_DWeiBo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0791998FA4302DCC0309F5CA /* Pods_DWeiBo.framework */; };
+		7E087E6F20A44074001F3219 /* StatusCellBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E087E6E20A44074001F3219 /* StatusCellBottomView.swift */; };
+		7E087E7120A4408F001F3219 /* StatusCellTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E087E7020A4408F001F3219 /* StatusCellTopView.swift */; };
+		7E087E7320A44679001F3219 /* StatusCellPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E087E7220A44679001F3219 /* StatusCellPictureView.swift */; };
 		7E0D043C20A18582004B69F3 /* NewFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D043B20A18582004B69F3 /* NewFeatureViewController.swift */; };
 		7E0D043E20A1A1A2004B69F3 /* WelcomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */; };
 		7E1CCEFE20A3E73000B2CC21 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1CCEFC20A3E73000B2CC21 /* UIView+AutoLayout.swift */; };
@@ -61,6 +64,9 @@
 		0BF49B965CA34AE533BC3AE1 /* Pods_DWeiBoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DWeiBoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A23DBFD60DA5BF70604A33E /* Pods-DWeiBo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DWeiBo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo.debug.xcconfig"; sourceTree = "<group>"; };
 		69F92004D276B664EB3AE838 /* Pods_DWeiBoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DWeiBoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E087E6E20A44074001F3219 /* StatusCellBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCellBottomView.swift; sourceTree = "<group>"; };
+		7E087E7020A4408F001F3219 /* StatusCellTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCellTopView.swift; sourceTree = "<group>"; };
+		7E087E7220A44679001F3219 /* StatusCellPictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCellPictureView.swift; sourceTree = "<group>"; };
 		7E0D043B20A18582004B69F3 /* NewFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeatureViewController.swift; sourceTree = "<group>"; };
 		7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomViewController.swift; sourceTree = "<group>"; };
 		7E1CCEFC20A3E73000B2CC21 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
@@ -238,6 +244,9 @@
 				7E3FACC720A29831002E5317 /* Status.swift */,
 				7E3FACC920A2D902002E5317 /* User.swift */,
 				7E3FACCB20A2DF65002E5317 /* StatusTableViewCell.swift */,
+				7E087E6E20A44074001F3219 /* StatusCellBottomView.swift */,
+				7E087E7020A4408F001F3219 /* StatusCellTopView.swift */,
+				7E087E7220A44679001F3219 /* StatusCellPictureView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -538,6 +547,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E087E7320A44679001F3219 /* StatusCellPictureView.swift in Sources */,
 				7ED8249320A055C1001FE12D /* NetworkTools.swift in Sources */,
 				7EC1B7061DC1A86B00D39997 /* DiscoverTableViewController.swift in Sources */,
 				7E3FACCC20A2DF65002E5317 /* StatusTableViewCell.swift in Sources */,
@@ -546,6 +556,7 @@
 				7E1CCF0120A3E75900B2CC21 /* Date+Category.swift in Sources */,
 				7E0D043C20A18582004B69F3 /* NewFeatureViewController.swift in Sources */,
 				7E1CCEFF20A3E73000B2CC21 /* String+Category.swift in Sources */,
+				7E087E7120A4408F001F3219 /* StatusCellTopView.swift in Sources */,
 				7EC1B6FE1DC1A7EA00D39997 /* MainViewController.swift in Sources */,
 				7EC1B6CA1DC1A5F400D39997 /* ViewController.swift in Sources */,
 				7EC1B7021DC1A85300D39997 /* MessageTableViewController.swift in Sources */,
@@ -553,6 +564,7 @@
 				7EDC452F1DC8918A002F256D /* BaseViewController.swift in Sources */,
 				7EC1B7091DC1ACDC00D39997 /* NullViewController.swift in Sources */,
 				7E1CCEFE20A3E73000B2CC21 /* UIView+AutoLayout.swift in Sources */,
+				7E087E6F20A44074001F3219 /* StatusCellBottomView.swift in Sources */,
 				7EDC45311DC89264002F256D /* VisitorView.swift in Sources */,
 				7EDA0D782092D75F009A8CEC /* UIBarButtonItem+Category.swift in Sources */,
 				7EC1B7001DC1A84100D39997 /* ProfileTableViewController.swift in Sources */,
