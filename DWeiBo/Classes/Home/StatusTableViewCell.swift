@@ -9,15 +9,20 @@
 import UIKit
 import SDWebImage
 
+let kPictureViewCellId = "kPictureViewCellId"
+
 class StatusTableViewCell: UITableViewCell {
 
+    // 保存配图的宽度约束
+    var pictureWidthCons:NSLayoutConstraint?
+    // 保存配图的高度约束
+    var pictureHeightCons:NSLayoutConstraint?
+    
     var status:Status? {
         didSet{
             nameLabel.text = status?.user?.name
             timeLabel.text = status?.created_at
             sourceLabel.text = status?.source
-//            timeLabel.text = "刚刚"
-//            sourceLabel.text = "来自：daisuke"
             contentLabel.text = status?.text
             if let url = status?.user?.profile_image_url {
                 iconView.sd_setImage(with: URL(string: url))
@@ -26,6 +31,13 @@ class StatusTableViewCell: UITableViewCell {
             // 设置会员图标
             verifiedView.image = status?.user?.verifiedImage
             vipView.image = status?.user?.mbrankImage
+            
+            // 设置配图尺寸
+            let size = calculateImageSize()
+            pictureWidthCons?.constant = size.viewSize.width
+            pictureHeightCons?.constant = size.viewSize.height
+            pictureLayout.itemSize = size.itemSize
+            pictureView.reloadData()
         }
     }
     
@@ -34,6 +46,9 @@ class StatusTableViewCell: UITableViewCell {
         
         // 初始化UI
         setupUI()
+        
+        // 初始化配图
+        setupPictureView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,6 +64,7 @@ class StatusTableViewCell: UITableViewCell {
         contentView.addSubview(sourceLabel)
         contentView.addSubview(contentLabel)
         contentView.addSubview(footerView)
+        contentView.addSubview(pictureView)
         
         // 布局
         iconView.xmg_AlignInner(type: XMG_AlignType.topLeft, referView: contentView, size: CGSize(width: 50, height: 50), offset: CGPoint(x: 10, y: 10))
@@ -59,10 +75,62 @@ class StatusTableViewCell: UITableViewCell {
         sourceLabel.xmg_AlignHorizontal(type: XMG_AlignType.bottomRight, referView: timeLabel, size: nil, offset: CGPoint(x: 10, y: 0))
         contentLabel.xmg_AlignVertical(type: XMG_AlignType.bottomLeft, referView: iconView, size: nil, offset: CGPoint(x: 0, y: 10))
         
+        // 配图约束
+        let cons = pictureView.xmg_AlignVertical(type: XMG_AlignType.bottomLeft, referView: contentLabel, size: CGSize.zero, offset: CGPoint(x: 0, y: 10))
+        pictureWidthCons = pictureView.xmg_Constraint(cons, attribute: NSLayoutAttribute.width)
+        pictureHeightCons = pictureView.xmg_Constraint(cons, attribute: NSLayoutAttribute.height)
+        
+        
         // 添加底部约束
         let width = UIScreen.main.bounds.width
-        footerView.xmg_AlignVertical(type: XMG_AlignType.bottomLeft, referView: contentLabel, size: CGSize(width: width, height: 44), offset: CGPoint(x: -10, y: 10))
-        footerView.xmg_AlignInner(type: XMG_AlignType.bottomRight, referView: contentView, size: nil, offset: CGPoint(x: -10, y: -10))
+        footerView.xmg_AlignVertical(type: XMG_AlignType.bottomLeft, referView: pictureView, size: CGSize(width: width, height: 44), offset: CGPoint(x: -10, y: 10))
+//        footerView.xmg_AlignInner(type: XMG_AlignType.bottomRight, referView: contentView, size: nil, offset: CGPoint(x: -10, y: -10))
+    }
+    
+    /// 初始化配图的相关属性
+    private func setupPictureView() {
+        // 注册cell
+        pictureView.register(PictureViewCell.self, forCellWithReuseIdentifier: kPictureViewCellId)
+        pictureView.dataSource = self
+        // 设置cell之间的间隙
+        pictureLayout.minimumLineSpacing = 10
+        pictureLayout.minimumInteritemSpacing = 10
+        // 设置配图的背景颜色
+        pictureView.backgroundColor = UIColor.darkGray
+    }
+    
+    
+    /// 计算配图的尺寸
+    private func calculateImageSize() -> (viewSize:CGSize, itemSize:CGSize) {
+        // 取出配图个数
+        let count = status?.storedPicURLs?.count
+        // 如果没有配图zero
+        if count == 0 || count == nil {
+            return (CGSize.zero, CGSize.zero)
+        }
+        
+        // 如果只有一张配图，返回图片的实际大小
+        if count == 1 {
+            // 取出缓存的图片
+            let key = status?.storedPicURLs?.first?.absoluteString
+            let image = SDWebImageManager.shared().imageCache.imageFromDiskCache(forKey: key!)
+            return (image!.size, image!.size)
+        }
+        
+        // 如果有4张配图，计算字格的大小
+        let width = 90
+        let margin = 10
+        if count == 4 {
+            let viewWidth = width * 2 + margin
+            return (CGSize(width: viewWidth, height: viewWidth), CGSize(width: width, height: width))
+        }
+        
+        // 如果是其他（多张），计算九宫格的大小
+        let colNumber = 3
+        let rowNumber = (count! - 1) / 3 + 1
+        let viewWidth = colNumber * width + (colNumber - 1) * margin
+        let viewHeight = rowNumber * width + (rowNumber - 1) * margin
+        return (CGSize(width: viewWidth, height: viewHeight), CGSize(width: width, height: width))
     }
     
     
@@ -104,6 +172,10 @@ class StatusTableViewCell: UITableViewCell {
         label.preferredMaxLayoutWidth = UIScreen.main.bounds.width - 20
         return label
     }()
+    
+    // 配图
+    private lazy var pictureLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    private lazy var pictureView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.pictureLayout)
 
     // 底部工具条
     private lazy var footerView: StatusFooterView = StatusFooterView()
@@ -151,7 +223,44 @@ class StatusFooterView: UIView {
 }
 
 
+extension StatusTableViewCell:UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return status?.storedPicURLs?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kPictureViewCellId, for: indexPath) as! PictureViewCell
+        if (status?.storedPicURLs?.count)! > indexPath.item {
+            cell.imageUrl = status?.storedPicURLs![indexPath.item]
+        }
+        
+        return cell
+    }
+}
 
+
+class PictureViewCell: UICollectionViewCell {
+    
+    var imageUrl:NSURL? {
+        didSet{
+            iconView.sd_setImage(with: imageUrl! as URL!)
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        contentView.addSubview(iconView)
+        
+        iconView.xmg_Fill(contentView)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private lazy var iconView = UIImageView ()
+}
 
 
 

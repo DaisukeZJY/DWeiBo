@@ -36,12 +36,27 @@ class Status: NSObject {
         }
     }
     /// 配图数组
-    var pic_urls: [[String:AnyObject]]?
+    var pic_urls: [[String:AnyObject]]? {
+        didSet {
+            // 初始化数组
+            storedPicURLs = [NSURL]()
+            for dict in pic_urls! {
+                if let urlStr = dict["thumbnail_pic"]{
+                    // 将字符串转为URL保存到数组中
+                    storedPicURLs?.append(NSURL(string: urlStr as! String)!)
+                }
+            }
+        }
+    }
+    
+    /// 保存当前微博所有配图的URL
+    var storedPicURLs:[NSURL]?
+    
     
     /// 用户信息
     var user:User?
     
-    
+    /// 加载微博数据
     class func loadStatuses(finishBlock:@escaping (_ models:[Status]?, _ error:NSError?) ->()){
         let path = "2/statuses/home_timeline.json"
         let params = ["access_token":UserAccount.loadAccount()!.access_token]
@@ -54,7 +69,10 @@ class Status: NSObject {
                 // 取出字典数组，转为model数组
                 let dictList = dict["statuses"] as! [[String: AnyObject]]
                 let models = dictToModel(list: dictList)
-                finishBlock(models, nil)
+                
+//                finishBlock(models, nil)
+                cacheStatusImages(list: models, finishBlock: finishBlock)
+                
                 SVProgressHUD.dismiss()
                 return
             }
@@ -72,6 +90,42 @@ class Status: NSObject {
             models.append(Status(dict: dict))
         }
         return models
+    }
+    
+    /// 缓存微博图片
+    class func cacheStatusImages(list:[Status], finishBlock:@escaping (_ models:[Status]?, _ error:NSError?) ->()) {
+        
+        // 创建一个数组
+        let group = DispatchGroup()
+        for status in list {
+            
+            // 判断当前微博是否有配图，没有就直接跳过
+//            if status.storedPicURLs == nil {
+//                continue
+//            }
+            
+            // 新语法
+            // 如果条件为nil，那么久会执行else后面的语句
+            guard status.storedPicURLs != nil else {
+                continue
+            }
+            
+            for url in status.storedPicURLs! {
+                // 将当前的下载操作添加到组
+                group.enter()
+                
+                SDWebImageManager.shared().downloadImage(with: url as URL, options: SDWebImageOptions(rawValue: 0), progress: nil) { (_, _, _, _, _) in
+                    // 离开当前组
+                    group.leave()
+                }
+            }
+        }
+        
+        // 当所有图片都下载完毕再通过闭包通用调用者
+        group.notify(queue: DispatchQueue.main) {
+            // 能够来到这个地方，一定是所有图片都下载完毕
+            finishBlock(list, nil)
+        }
     }
     
     /// 字典转模型

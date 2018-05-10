@@ -39,7 +39,8 @@ class HomeTableViewController: BaseViewController {
         // 注册cell
         tableView.register(StatusTableViewCell.self, forCellReuseIdentifier: kHomeCellReuseIdentifier)
         tableView.estimatedRowHeight = 200
-        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = 500
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         // 加载数据
