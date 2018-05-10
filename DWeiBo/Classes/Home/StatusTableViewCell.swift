@@ -96,7 +96,18 @@ class StatusTableViewCell: UITableViewCell {
         pictureLayout.minimumLineSpacing = 10
         pictureLayout.minimumInteritemSpacing = 10
         // 设置配图的背景颜色
-        pictureView.backgroundColor = UIColor.darkGray
+        pictureView.backgroundColor = UIColor.white
+    }
+    
+    /// 获取行高
+    func rowHeight(status:Status) -> CGFloat {
+        // 为了调用didSet， 计算配图的高度
+        self.status = status
+        // 强制更新页面
+        self.layoutIfNeeded()
+        
+        // 返回底部试图最大的Y值
+        return footerView.frame.maxY
     }
     
     

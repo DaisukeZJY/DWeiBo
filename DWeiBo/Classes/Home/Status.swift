@@ -18,7 +18,7 @@ class Status: NSObject {
         }
     }
     /// 微博ID
-    var id:Int?
+    var id:Int = 0
     /// 微博信息内容
     var text:String?
     /// 微博来源

@@ -13,8 +13,6 @@ import SVProgressHUD
 let kHomeCellReuseIdentifier = "kHomeCellReuseIdentifier"
 
 class HomeTableViewController: BaseViewController {
-
-    lazy var statuseFrames = NSArray();
     
     // 保存微博数组
     var statuses: [Status]? {
@@ -22,6 +20,14 @@ class HomeTableViewController: BaseViewController {
             // 设置数据完毕，刷新表格
             tableView.reloadData()
         }
+    }
+    
+    /// 微博行高的缓存，利用字典作为容器，key是微博的ID，值就是对应微博的行高
+    var rowCache: [Int:CGFloat] = [Int:CGFloat]()
+    
+    override func didReceiveMemoryWarning() {
+        // 清空缓存
+        rowCache.removeAll()
     }
     
     override func viewDidLoad() {
@@ -38,9 +44,9 @@ class HomeTableViewController: BaseViewController {
         
         // 注册cell
         tableView.register(StatusTableViewCell.self, forCellReuseIdentifier: kHomeCellReuseIdentifier)
-        tableView.estimatedRowHeight = 200
+//        tableView.estimatedRowHeight = 200
 //        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.rowHeight = 500
+//        tableView.rowHeight = 500
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         // 加载数据
@@ -111,6 +117,24 @@ extension HomeTableViewController {
             cell.status = status
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // 取出对应的模型
+        let status = statuses![indexPath.row]
+        // 判断缓存中有没有
+        if let height = rowCache[status.id] {
+            return height
+        }
+        
+        // 拿到cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: kHomeCellReuseIdentifier) as! StatusTableViewCell
+        
+        // 拿到行高
+        let rowHeight = cell.rowHeight(status: status)
+        // 缓存行高
+        rowCache[status.id] = rowHeight
+        return rowHeight
     }
 }
 
