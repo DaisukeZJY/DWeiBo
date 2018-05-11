@@ -43,7 +43,10 @@ class HomeTableViewController: BaseViewController {
         setupNav()
         
         // 注册cell
-        tableView.register(StatusTableViewCell.self, forCellReuseIdentifier: kHomeCellReuseIdentifier)
+//        tableView.register(StatusTableViewCell.self, forCellReuseIdentifier: kHomeCellReuseIdentifier)
+        tableView.register(StatusTableViewCell.self, forCellReuseIdentifier: StatusTableViewCellIdentifier.NormalCell.rawValue)
+        tableView.register(StatusTableViewCell.self, forCellReuseIdentifier: StatusTableViewCellIdentifier.ForwardCell.rawValue)
+        
 //        tableView.estimatedRowHeight = 200
 //        tableView.rowHeight = UITableViewAutomaticDimension
 //        tableView.rowHeight = 500
@@ -110,12 +113,14 @@ extension HomeTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kHomeCellReuseIdentifier, for: indexPath) as! StatusTableViewCell
-        if statuses!.count > indexPath.row {
-            let status = statuses![indexPath.row]
-//            cell.textLabel?.text = status.text
-            cell.status = status
-        }
+        let status = statuses![indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: StatusTableViewCellIdentifier.cellID(status: status), for: indexPath) as! StatusTableViewCell
+//        if statuses!.count > indexPath.row {
+//            let status = statuses![indexPath.row]
+//            cell.status = status
+//        }
+        cell.status = status
         return cell
     }
     
@@ -128,7 +133,8 @@ extension HomeTableViewController {
         }
         
         // 拿到cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: kHomeCellReuseIdentifier) as! StatusTableViewCell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: kHomeCellReuseIdentifier) as! StatusTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: StatusTableViewCellIdentifier.cellID(status: status)) as! StatusTableViewCell
         
         // 拿到行高
         let rowHeight = cell.rowHeight(status: status)

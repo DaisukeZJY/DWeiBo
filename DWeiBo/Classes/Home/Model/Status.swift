@@ -55,6 +55,14 @@ class Status: NSObject {
     /// 保存当前微博所有配图的URL
     var storedPicURLs:[NSURL]?
     
+    /// 转发微博
+    var retweeted_status:Status?
+    
+    /// 如果有转发，原创就没有配图
+    /// 定义一个计算属性，用于返回原创获取转发配图的URL数组
+    var pictureURLs:[NSURL]? {
+        return retweeted_status != nil ? retweeted_status?.storedPicURLs : storedPicURLs
+    }
     
     /// 用户信息
     var user:User?
@@ -109,11 +117,15 @@ class Status: NSObject {
             
             // 新语法
             // 如果条件为nil，那么久会执行else后面的语句
-            guard status.storedPicURLs != nil else {
+//            guard status.storedPicURLs != nil else {
+//                continue
+//            }
+            
+            guard let _ = status.pictureURLs else {
                 continue
             }
             
-            for url in status.storedPicURLs! {
+            for url in status.pictureURLs! {
                 // 将当前的下载操作添加到组
                 group.enter()
                 
@@ -143,6 +155,12 @@ class Status: NSObject {
             user = User(dict: value as! [String : AnyObject])
             return
         }
+        
+        if "retweeted_status" == key {
+            retweeted_status = Status(dict: value as! [String : AnyObject])
+            return
+        }
+        
         // 调用父类的方法，按照系统默认处理
         super.setValue(value, forKey: key)
     }

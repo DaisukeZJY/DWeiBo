@@ -8,17 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		666D135BBECA564A2D116B61 /* Pods_DWeiBo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0791998FA4302DCC0309F5CA /* Pods_DWeiBo.framework */; };
-		7E087E6F20A44074001F3219 /* StatusCellBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E087E6E20A44074001F3219 /* StatusCellBottomView.swift */; };
-		7E087E7120A4408F001F3219 /* StatusCellTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E087E7020A4408F001F3219 /* StatusCellTopView.swift */; };
-		7E087E7320A44679001F3219 /* StatusCellPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E087E7220A44679001F3219 /* StatusCellPictureView.swift */; };
 		7E0D043C20A18582004B69F3 /* NewFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D043B20A18582004B69F3 /* NewFeatureViewController.swift */; };
 		7E0D043E20A1A1A2004B69F3 /* WelcomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */; };
 		7E1CCEFE20A3E73000B2CC21 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1CCEFC20A3E73000B2CC21 /* UIView+AutoLayout.swift */; };
 		7E1CCEFF20A3E73000B2CC21 /* String+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1CCEFD20A3E73000B2CC21 /* String+Category.swift */; };
 		7E1CCF0120A3E75900B2CC21 /* Date+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1CCF0020A3E75900B2CC21 /* Date+Category.swift */; };
-		7E3FACC820A29831002E5317 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FACC720A29831002E5317 /* Status.swift */; };
-		7E3FACCA20A2D902002E5317 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FACC920A2D902002E5317 /* User.swift */; };
-		7E3FACCC20A2DF65002E5317 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FACCB20A2DF65002E5317 /* StatusTableViewCell.swift */; };
 		7E3FACCE20A2F3D7002E5317 /* UILabel+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FACCD20A2F3D7002E5317 /* UILabel+Category.swift */; };
 		7E3FACD020A2F3E8002E5317 /* UIButton+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FACCF20A2F3E8002E5317 /* UIButton+Category.swift */; };
 		7EC1B6C81DC1A5F400D39997 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1B6C71DC1A5F400D39997 /* AppDelegate.swift */; };
@@ -40,6 +34,14 @@
 		7EDA0D782092D75F009A8CEC /* UIBarButtonItem+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA0D772092D75F009A8CEC /* UIBarButtonItem+Category.swift */; };
 		7EDC452F1DC8918A002F256D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC452E1DC8918A002F256D /* BaseViewController.swift */; };
 		7EDC45311DC89264002F256D /* VisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC45301DC89264002F256D /* VisitorView.swift */; };
+		7EF7AE9520A53069004BB001 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE8E20A53068004BB001 /* StatusTableViewCell.swift */; };
+		7EF7AE9620A53069004BB001 /* StatusCellBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE8F20A53068004BB001 /* StatusCellBottomView.swift */; };
+		7EF7AE9720A53069004BB001 /* StatusCellTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE9020A53068004BB001 /* StatusCellTopView.swift */; };
+		7EF7AE9820A53069004BB001 /* StatusCellPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE9120A53068004BB001 /* StatusCellPictureView.swift */; };
+		7EF7AE9920A53069004BB001 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE9320A53068004BB001 /* User.swift */; };
+		7EF7AE9A20A53069004BB001 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE9420A53068004BB001 /* Status.swift */; };
+		7EF7AE9C20A5309A004BB001 /* StatusNormalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE9B20A5309A004BB001 /* StatusNormalTableViewCell.swift */; };
+		7EF7AE9E20A530BD004BB001 /* StatusForwardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE9D20A530BD004BB001 /* StatusForwardTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,17 +66,11 @@
 		0BF49B965CA34AE533BC3AE1 /* Pods_DWeiBoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DWeiBoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A23DBFD60DA5BF70604A33E /* Pods-DWeiBo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DWeiBo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo.debug.xcconfig"; sourceTree = "<group>"; };
 		69F92004D276B664EB3AE838 /* Pods_DWeiBoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DWeiBoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E087E6E20A44074001F3219 /* StatusCellBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCellBottomView.swift; sourceTree = "<group>"; };
-		7E087E7020A4408F001F3219 /* StatusCellTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCellTopView.swift; sourceTree = "<group>"; };
-		7E087E7220A44679001F3219 /* StatusCellPictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCellPictureView.swift; sourceTree = "<group>"; };
 		7E0D043B20A18582004B69F3 /* NewFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeatureViewController.swift; sourceTree = "<group>"; };
 		7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomViewController.swift; sourceTree = "<group>"; };
 		7E1CCEFC20A3E73000B2CC21 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		7E1CCEFD20A3E73000B2CC21 /* String+Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Category.swift"; sourceTree = "<group>"; };
 		7E1CCF0020A3E75900B2CC21 /* Date+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Category.swift"; sourceTree = "<group>"; };
-		7E3FACC720A29831002E5317 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
-		7E3FACC920A2D902002E5317 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		7E3FACCB20A2DF65002E5317 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
 		7E3FACCD20A2F3D7002E5317 /* UILabel+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Category.swift"; sourceTree = "<group>"; };
 		7E3FACCF20A2F3E8002E5317 /* UIButton+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Category.swift"; sourceTree = "<group>"; };
 		7EC1B6C41DC1A5F400D39997 /* DWeiBo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DWeiBo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +99,14 @@
 		7EDA0D772092D75F009A8CEC /* UIBarButtonItem+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Category.swift"; sourceTree = "<group>"; };
 		7EDC452E1DC8918A002F256D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EDC45301DC89264002F256D /* VisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
+		7EF7AE8E20A53068004BB001 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
+		7EF7AE8F20A53068004BB001 /* StatusCellBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCellBottomView.swift; sourceTree = "<group>"; };
+		7EF7AE9020A53068004BB001 /* StatusCellTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCellTopView.swift; sourceTree = "<group>"; };
+		7EF7AE9120A53068004BB001 /* StatusCellPictureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCellPictureView.swift; sourceTree = "<group>"; };
+		7EF7AE9320A53068004BB001 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7EF7AE9420A53068004BB001 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		7EF7AE9B20A5309A004BB001 /* StatusNormalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNormalTableViewCell.swift; sourceTree = "<group>"; };
+		7EF7AE9D20A530BD004BB001 /* StatusForwardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusForwardTableViewCell.swift; sourceTree = "<group>"; };
 		7F7620D8C5FC37AAD0DD67FE /* Pods-DWeiBo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DWeiBo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DWeiBo/Pods-DWeiBo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -240,13 +244,9 @@
 		7EC1B6F81DC1A72200D39997 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				7EF7AE8D20A53068004BB001 /* Cell */,
+				7EF7AE9220A53068004BB001 /* Model */,
 				7EC1B7031DC1A86100D39997 /* HomeTableViewController.swift */,
-				7E3FACC720A29831002E5317 /* Status.swift */,
-				7E3FACC920A2D902002E5317 /* User.swift */,
-				7E3FACCB20A2DF65002E5317 /* StatusTableViewCell.swift */,
-				7E087E6E20A44074001F3219 /* StatusCellBottomView.swift */,
-				7E087E7020A4408F001F3219 /* StatusCellTopView.swift */,
-				7E087E7220A44679001F3219 /* StatusCellPictureView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -313,6 +313,28 @@
 				7E3FACCF20A2F3E8002E5317 /* UIButton+Category.swift */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		7EF7AE8D20A53068004BB001 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7EF7AE8E20A53068004BB001 /* StatusTableViewCell.swift */,
+				7EF7AE8F20A53068004BB001 /* StatusCellBottomView.swift */,
+				7EF7AE9020A53068004BB001 /* StatusCellTopView.swift */,
+				7EF7AE9120A53068004BB001 /* StatusCellPictureView.swift */,
+				7EF7AE9B20A5309A004BB001 /* StatusNormalTableViewCell.swift */,
+				7EF7AE9D20A530BD004BB001 /* StatusForwardTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		7EF7AE9220A53068004BB001 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7EF7AE9320A53068004BB001 /* User.swift */,
+				7EF7AE9420A53068004BB001 /* Status.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9E6A419CD622618F20374DAF /* Pods */ = {
@@ -547,32 +569,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E087E7320A44679001F3219 /* StatusCellPictureView.swift in Sources */,
 				7ED8249320A055C1001FE12D /* NetworkTools.swift in Sources */,
+				7EF7AE9720A53069004BB001 /* StatusCellTopView.swift in Sources */,
 				7EC1B7061DC1A86B00D39997 /* DiscoverTableViewController.swift in Sources */,
-				7E3FACCC20A2DF65002E5317 /* StatusTableViewCell.swift in Sources */,
+				7EF7AE9920A53069004BB001 /* User.swift in Sources */,
+				7EF7AE9520A53069004BB001 /* StatusTableViewCell.swift in Sources */,
 				7E3FACCE20A2F3D7002E5317 /* UILabel+Category.swift in Sources */,
+				7EF7AE9C20A5309A004BB001 /* StatusNormalTableViewCell.swift in Sources */,
 				7EC1B7041DC1A86100D39997 /* HomeTableViewController.swift in Sources */,
 				7E1CCF0120A3E75900B2CC21 /* Date+Category.swift in Sources */,
 				7E0D043C20A18582004B69F3 /* NewFeatureViewController.swift in Sources */,
 				7E1CCEFF20A3E73000B2CC21 /* String+Category.swift in Sources */,
-				7E087E7120A4408F001F3219 /* StatusCellTopView.swift in Sources */,
+				7EF7AE9820A53069004BB001 /* StatusCellPictureView.swift in Sources */,
 				7EC1B6FE1DC1A7EA00D39997 /* MainViewController.swift in Sources */,
 				7EC1B6CA1DC1A5F400D39997 /* ViewController.swift in Sources */,
 				7EC1B7021DC1A85300D39997 /* MessageTableViewController.swift in Sources */,
-				7E3FACCA20A2D902002E5317 /* User.swift in Sources */,
 				7EDC452F1DC8918A002F256D /* BaseViewController.swift in Sources */,
 				7EC1B7091DC1ACDC00D39997 /* NullViewController.swift in Sources */,
+				7EF7AE9E20A530BD004BB001 /* StatusForwardTableViewCell.swift in Sources */,
 				7E1CCEFE20A3E73000B2CC21 /* UIView+AutoLayout.swift in Sources */,
-				7E087E6F20A44074001F3219 /* StatusCellBottomView.swift in Sources */,
 				7EDC45311DC89264002F256D /* VisitorView.swift in Sources */,
 				7EDA0D782092D75F009A8CEC /* UIBarButtonItem+Category.swift in Sources */,
 				7EC1B7001DC1A84100D39997 /* ProfileTableViewController.swift in Sources */,
 				7ED8249120A04E75001FE12D /* OAuthViewController.swift in Sources */,
+				7EF7AE9A20A53069004BB001 /* Status.swift in Sources */,
 				7E3FACD020A2F3E8002E5317 /* UIButton+Category.swift in Sources */,
+				7EF7AE9620A53069004BB001 /* StatusCellBottomView.swift in Sources */,
 				7EC1B6C81DC1A5F400D39997 /* AppDelegate.swift in Sources */,
 				7ED8249520A05C29001FE12D /* UserAccount.swift in Sources */,
-				7E3FACC820A29831002E5317 /* Status.swift in Sources */,
 				7E0D043E20A1A1A2004B69F3 /* WelcomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
