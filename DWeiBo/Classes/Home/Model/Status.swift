@@ -41,12 +41,25 @@ class Status: NSObject {
     /// 配图数组
     var pic_urls: [[String:AnyObject]]? {
         didSet {
+            // 判断数组中是否有数据 nil
+            if pic_urls?.count == 0 {
+                return
+            }
+            
             // 初始化数组
             storedPicURLs = [NSURL]()
+            storeLargePictureURLs = [NSURL]()
+            
             for dict in pic_urls! {
                 if let urlStr = dict["thumbnail_pic"]{
                     // 将字符串转为URL保存到数组中
+                    // 生成小图
                     storedPicURLs?.append(NSURL(string: urlStr as! String)!)
+                    
+                    // 生成大图
+                    let largeUrlStr = urlStr.replacingOccurrences(of: "thumbnail", with: "large")
+                    storeLargePictureURLs?.append(NSURL(string: largeUrlStr)!)
+                    
                 }
             }
         }
@@ -54,15 +67,21 @@ class Status: NSObject {
     
     /// 保存当前微博所有配图的URL
     var storedPicURLs:[NSURL]?
+    /// 保存配图的大图URL数组
+    var storeLargePictureURLs: [NSURL]?
+    var largePictureURLs: [NSURL]? {
+        return retweeted_status == nil ? storeLargePictureURLs : retweeted_status?.storeLargePictureURLs
+    }
     
-    /// 转发微博
-    var retweeted_status:Status?
     
     /// 如果有转发，原创就没有配图
     /// 定义一个计算属性，用于返回原创获取转发配图的URL数组
     var pictureURLs:[NSURL]? {
         return retweeted_status != nil ? retweeted_status?.storedPicURLs : storedPicURLs
     }
+    
+    /// 转发微博
+    var retweeted_status:Status?
     
     /// 用户信息
     var user:User?

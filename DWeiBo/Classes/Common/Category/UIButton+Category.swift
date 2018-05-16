@@ -21,4 +21,32 @@ extension UIButton {
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         return btn
     }
+    
+    convenience init(tittle:String, fontSize:CGFloat = 12, color: UIColor = UIColor.darkGray, backColor: UIColor = UIColor.white){
+        self.init()
+        setTitle(tittle, for: UIControlState.normal)
+        setTitleColor(color, for: UIControlState.normal)
+        titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
+        backgroundColor = backColor
+    }
+    
+    convenience init(tittle:String, imageName:String, fontSize:CGFloat = 12, color: UIColor = UIColor.darkGray){
+        self.init()
+        setTitle(tittle, for: UIControlState.normal)
+        setTitleColor(color, for: UIControlState.normal)
+        titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
+        setImage(imageName: imageName)
+    }
+    
+    convenience init(imageName:String){
+        self.init()
+        setImage(imageName: imageName)
+    }
+    
+    func setImage(imageName:String) {
+        setImage(UIImage(named: imageName), for: UIControlState.normal)
+        // 提示：如果高亮图片不存在不会设置
+        setImage(UIImage(named: imageName + "_highlighted"), for: UIControlState.highlighted)
+    }
+    
 }

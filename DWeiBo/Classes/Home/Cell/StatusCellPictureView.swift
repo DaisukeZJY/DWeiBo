@@ -8,6 +8,13 @@
 
 import UIKit
 
+/// 选中照片通知
+let kStatusCellSelectPictureNotify = "kStatusCellSelectPictureNotify"
+/// 照片的URL
+let kStatusCellSelectPictureURLNotify = "kStatusCellSelectPictureURLNotify"
+/// 照片的index
+let kStatusCellSelectPictureIndexNotify = "kStatusCellSelectPictureIndexNotify"
+
 class StatusCellPictureView: UICollectionView {
 
     var status:Status? {
@@ -23,6 +30,7 @@ class StatusCellPictureView: UICollectionView {
         // 注册cell
         register(PictureViewCell.self, forCellWithReuseIdentifier: kPictureViewCellId)
         dataSource = self
+        delegate = self
         // 设置cell之间的间隙
         pictureLayout.minimumLineSpacing = 10
         pictureLayout.minimumInteritemSpacing = 10
@@ -71,7 +79,7 @@ class StatusCellPictureView: UICollectionView {
     
 }
 
-extension StatusCellPictureView:UICollectionViewDataSource{
+extension StatusCellPictureView: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return status?.storedPicURLs?.count ?? 0
     }
@@ -84,13 +92,23 @@ extension StatusCellPictureView:UICollectionViewDataSource{
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // 拿到当前点击图片
+//        print(status?.pictureURLs![indexPath.item])
+//        print(status?.storedPicURLs![indexPath.item])
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kStatusCellSelectPictureNotify), object: self, userInfo: [kStatusCellSelectPictureURLNotify:status!.storeLargePictureURLs!, kStatusCellSelectPictureIndexNotify:indexPath])
+        
+    }
+    
 }
 
 private class PictureViewCell: UICollectionViewCell {
     
     var imageUrl:NSURL? {
         didSet{
-            iconView.sd_setImage(with: imageUrl! as URL!)
+            iconView.sd_setImage(with: imageUrl! as URL?)
         }
     }
     

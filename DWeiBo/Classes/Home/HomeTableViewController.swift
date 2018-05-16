@@ -47,7 +47,8 @@ class HomeTableViewController: BaseViewController {
         
         tableView.xmg_Fill(view, insets: UIEdgeInsetsMake(navHeight, 0, tabbarHeight, 0))
         
-//        tableView.frame = CGRect(x: 0, y: navHeight, width: view.frame.size.width, height: view.frame.size.height - tabbarHeight - navHeight)
+        // 添加通知
+        NotificationCenter.default.addObserver(self, selector: #selector(selectPicture(notify:)), name: NSNotification.Name(rawValue: kStatusCellSelectPictureNotify), object: nil)
         
     }
 
@@ -64,6 +65,22 @@ class HomeTableViewController: BaseViewController {
         titleBtn.sizeToFit()
         navigationItem.titleView = titleBtn
     }
+    
+    func selectPicture(notify:Notification) {
+        // 获取参数。提示：从自定义通知获取参数，一定记住检查参数值
+        guard let urls = notify.userInfo![kStatusCellSelectPictureURLNotify] as? [NSURL] else {
+            print("url数组不存在")
+            return
+        }
+        guard let indexPath = notify.userInfo![kStatusCellSelectPictureIndexNotify] as? NSIndexPath else {
+            print("indexPath不存在")
+            return
+        }
+        let vc = PhotoBrowserViewController(urls: urls, index: indexPath.item)
+        present(vc, animated: true, completion: nil)
+        
+    }
+    
     
     /// 定义变量记录当时上拉还是下拉
     var pullupRefreshFalg = false
