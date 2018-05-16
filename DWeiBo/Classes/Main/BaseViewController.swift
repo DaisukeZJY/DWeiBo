@@ -8,7 +8,17 @@
 
 import UIKit
 
-class BaseViewController: UITableViewController, VisitorViewDelegate {
+class BaseViewController: UIViewController, VisitorViewDelegate {
+    
+    var navHeight:CGFloat {
+        return (navigationController?.navigationBar.frame.size.height)!
+    }
+    
+    var tabbarHeight:CGFloat {
+        return UIApplication.shared.statusBarFrame.size.height
+    }
+    
+    
     func loginBtnWillClick() {
         print(#function)
         // 弹出登录界面

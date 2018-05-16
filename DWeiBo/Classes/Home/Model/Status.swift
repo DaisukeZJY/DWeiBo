@@ -68,11 +68,21 @@ class Status: NSObject {
     var user:User?
     
     /// 加载微博数据
-    class func loadStatuses(finishBlock:@escaping (_ models:[Status]?, _ error:NSError?) ->()){
+    class func loadStatuses(since_id:Int, max_id:Int, finishBlock:@escaping (_ models:[Status]?, _ error:NSError?) ->()){
         let path = "2/statuses/home_timeline.json"
-        let params = ["access_token":UserAccount.loadAccount()!.access_token]
+        var params = ["access_token":UserAccount.loadAccount()!.access_token]
         
-        SVProgressHUD.setStatus("loading...")
+        // 下拉刷新
+        if since_id > 0 {
+            params["since_id"] = "\(since_id)"
+        }
+        
+        // 上拉刷新
+        if max_id > 0 {
+            params["max_id"] = "\(max_id - 1)"
+        }
+        
+        SVProgressHUD.show(withStatus: "loading...")
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
         
         NetworkTools.shareNetworkTools().get(path, parameters: params, progress: nil, success: { (_, json) in

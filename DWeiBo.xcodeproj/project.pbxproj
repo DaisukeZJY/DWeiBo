@@ -244,6 +244,7 @@
 		7EC1B6F81DC1A72200D39997 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				7EF7AE9F20A5724C004BB001 /* SubViews */,
 				7EF7AE8D20A53068004BB001 /* Cell */,
 				7EF7AE9220A53068004BB001 /* Model */,
 				7EC1B7031DC1A86100D39997 /* HomeTableViewController.swift */,
@@ -337,6 +338,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		7EF7AE9F20A5724C004BB001 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		9E6A419CD622618F20374DAF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +436,7 @@
 				TargetAttributes = {
 					7EC1B6C31DC1A5F400D39997 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = D54GZX79JD;
 						ProvisioningStyle = Automatic;
 					};
 					7EC1B6D71DC1A5F400D39997 = {
@@ -743,6 +752,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = D54GZX79JD;
 				INFOPLIST_FILE = DWeiBo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -759,6 +769,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = D54GZX79JD;
 				INFOPLIST_FILE = DWeiBo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
