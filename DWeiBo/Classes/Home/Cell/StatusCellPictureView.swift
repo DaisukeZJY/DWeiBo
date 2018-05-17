@@ -109,6 +109,9 @@ private class PictureViewCell: UICollectionViewCell {
     var imageUrl:NSURL? {
         didSet{
             iconView.sd_setImage(with: imageUrl! as URL?)
+            
+            // 设置时候显示gif图标
+            gifImageView.isHidden = ((imageUrl!.absoluteString! as NSString).pathExtension.lowercased() != "gif")
         }
     }
     
@@ -116,8 +119,10 @@ private class PictureViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         contentView.addSubview(iconView)
+        contentView.addSubview(gifImageView)
         
         iconView.xmg_Fill(contentView)
+        gifImageView.xmg_AlignInner(type: XMG_AlignType.bottomRight, referView: iconView, size: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -125,5 +130,11 @@ private class PictureViewCell: UICollectionViewCell {
     }
     
     private lazy var iconView = UIImageView ()
+    lazy var gifImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "timeline_image_gif")
+        view.isHidden = true
+        return view
+    }()
 }
 
