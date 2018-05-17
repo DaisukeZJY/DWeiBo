@@ -16,6 +16,7 @@
 		7E3FACCE20A2F3D7002E5317 /* UILabel+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FACCD20A2F3D7002E5317 /* UILabel+Category.swift */; };
 		7E3FACD020A2F3E8002E5317 /* UIButton+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FACCF20A2F3E8002E5317 /* UIButton+Category.swift */; };
 		7E8EF5E420AC220400F33A74 /* PhotoBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EF5E320AC220400F33A74 /* PhotoBrowserViewController.swift */; };
+		7E8EF5E620AC30B800F33A74 /* PhotoBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EF5E520AC30B800F33A74 /* PhotoBrowserCell.swift */; };
 		7EC1B6C81DC1A5F400D39997 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1B6C71DC1A5F400D39997 /* AppDelegate.swift */; };
 		7EC1B6CA1DC1A5F400D39997 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1B6C91DC1A5F400D39997 /* ViewController.swift */; };
 		7EC1B6CF1DC1A5F400D39997 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC1B6CE1DC1A5F400D39997 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		7EDA0D782092D75F009A8CEC /* UIBarButtonItem+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA0D772092D75F009A8CEC /* UIBarButtonItem+Category.swift */; };
 		7EDC452F1DC8918A002F256D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC452E1DC8918A002F256D /* BaseViewController.swift */; };
 		7EDC45311DC89264002F256D /* VisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC45301DC89264002F256D /* VisitorView.swift */; };
+		7EE02C0A20AD76700058C4FB /* UIColor+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE02C0920AD76700058C4FB /* UIColor+Category.swift */; };
 		7EF7AE9520A53069004BB001 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE8E20A53068004BB001 /* StatusTableViewCell.swift */; };
 		7EF7AE9620A53069004BB001 /* StatusCellBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE8F20A53068004BB001 /* StatusCellBottomView.swift */; };
 		7EF7AE9720A53069004BB001 /* StatusCellTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7AE9020A53068004BB001 /* StatusCellTopView.swift */; };
@@ -75,6 +77,7 @@
 		7E3FACCD20A2F3D7002E5317 /* UILabel+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Category.swift"; sourceTree = "<group>"; };
 		7E3FACCF20A2F3E8002E5317 /* UIButton+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Category.swift"; sourceTree = "<group>"; };
 		7E8EF5E320AC220400F33A74 /* PhotoBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserViewController.swift; sourceTree = "<group>"; };
+		7E8EF5E520AC30B800F33A74 /* PhotoBrowserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserCell.swift; sourceTree = "<group>"; };
 		7EC1B6C41DC1A5F400D39997 /* DWeiBo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DWeiBo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC1B6C71DC1A5F400D39997 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC1B6C91DC1A5F400D39997 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 		7EDA0D772092D75F009A8CEC /* UIBarButtonItem+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Category.swift"; sourceTree = "<group>"; };
 		7EDC452E1DC8918A002F256D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EDC45301DC89264002F256D /* VisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
+		7EE02C0920AD76700058C4FB /* UIColor+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Category.swift"; sourceTree = "<group>"; };
 		7EF7AE8E20A53068004BB001 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
 		7EF7AE8F20A53068004BB001 /* StatusCellBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCellBottomView.swift; sourceTree = "<group>"; };
 		7EF7AE9020A53068004BB001 /* StatusCellTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCellTopView.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 				7E1CCEFC20A3E73000B2CC21 /* UIView+AutoLayout.swift */,
 				7E1CCEFD20A3E73000B2CC21 /* String+Category.swift */,
 				7E1CCF0020A3E75900B2CC21 /* Date+Category.swift */,
+				7EE02C0920AD76700058C4FB /* UIColor+Category.swift */,
 			);
 			path = Gategory;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				7E8EF5E320AC220400F33A74 /* PhotoBrowserViewController.swift */,
+				7E8EF5E520AC30B800F33A74 /* PhotoBrowserCell.swift */,
 			);
 			path = PhotoBrowser;
 			sourceTree = "<group>";
@@ -612,11 +618,13 @@
 				7EDA0D782092D75F009A8CEC /* UIBarButtonItem+Category.swift in Sources */,
 				7EC1B7001DC1A84100D39997 /* ProfileTableViewController.swift in Sources */,
 				7ED8249120A04E75001FE12D /* OAuthViewController.swift in Sources */,
+				7EE02C0A20AD76700058C4FB /* UIColor+Category.swift in Sources */,
 				7EF7AE9A20A53069004BB001 /* Status.swift in Sources */,
 				7E8EF5E420AC220400F33A74 /* PhotoBrowserViewController.swift in Sources */,
 				7E3FACD020A2F3E8002E5317 /* UIButton+Category.swift in Sources */,
 				7EF7AE9620A53069004BB001 /* StatusCellBottomView.swift in Sources */,
 				7EC1B6C81DC1A5F400D39997 /* AppDelegate.swift in Sources */,
+				7E8EF5E620AC30B800F33A74 /* PhotoBrowserCell.swift in Sources */,
 				7ED8249520A05C29001FE12D /* UserAccount.swift in Sources */,
 				7E0D043E20A1A1A2004B69F3 /* WelcomViewController.swift in Sources */,
 			);

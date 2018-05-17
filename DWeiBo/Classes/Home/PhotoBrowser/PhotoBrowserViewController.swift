@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kCellReuseIdentifier = "kCellReuseIdentifier"
+
 class PhotoBrowserViewController: UIViewController {
 
     /// 图片数组
@@ -43,6 +45,10 @@ class PhotoBrowserViewController: UIViewController {
         
         saveBtn.addTarget(self, action: #selector(save), for: UIControlEvents.touchUpInside)
         closeBtn.addTarget(self, action: #selector(close), for: UIControlEvents.touchUpInside)
+        
+        // 注册cell
+        collectionView.dataSource = self
+        collectionView.register(PhotoBrowserCell.self, forCellWithReuseIdentifier: kCellReuseIdentifier)
     }
     
     func close() {
@@ -55,6 +61,33 @@ class PhotoBrowserViewController: UIViewController {
     
     private lazy var closeBtn: UIButton = UIButton(tittle: "关闭", fontSize: 14, color: UIColor.white, backColor: UIColor.darkGray)
     private lazy var saveBtn: UIButton = UIButton(tittle: "保存", fontSize: 14, color: UIColor.white, backColor: UIColor.darkGray)
-    private lazy var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private lazy var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: PhotoBrowserLayout())
     
+}
+
+class PhotoBrowserLayout: UICollectionViewFlowLayout {
+    override func prepare() {
+        itemSize = UIScreen.main.bounds.size
+        minimumLineSpacing = 0
+        minimumInteritemSpacing = 0
+        scrollDirection = UICollectionViewScrollDirection.horizontal
+        collectionView?.isPagingEnabled = true
+        collectionView?.showsHorizontalScrollIndicator = false
+        collectionView?.bounces = false
+    }
+    
+}
+
+extension PhotoBrowserViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageUrls!.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCellReuseIdentifier, for: indexPath) as! PhotoBrowserCell
+        cell.imageURL = imageUrls![indexPath.item]
+        cell.backgroundColor = UIColor.randomColor()
+        return cell
+    }
 }
