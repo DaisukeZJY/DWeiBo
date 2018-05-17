@@ -50,6 +50,10 @@ class PhotoBrowserViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(PhotoBrowserCell.self, forCellWithReuseIdentifier: kCellReuseIdentifier)
         
+        // 滚动到指定位置
+        let indexPath = IndexPath(item: currentIndex, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: false)
+        
     }
     
     func close() {
