@@ -9,7 +9,16 @@
 import UIKit
 import SDWebImage
 
+protocol PhotoBrowserCellDelegate: NSObjectProtocol {
+    /// 结束缩放
+    func photoBrowserCellDidTapImageView()
+}
+
 class PhotoBrowserCell: UICollectionViewCell {
+    
+    // 声明代理属性
+    weak var photoDelegate:PhotoBrowserCellDelegate?
+    
     
     // 图片的URL
     var imageURL: NSURL? {
@@ -75,6 +84,15 @@ class PhotoBrowserCell: UICollectionViewCell {
         
         scrollView.frame = UIScreen.main.bounds
         indicator.center = scrollView.center
+        
+        // 添加imageView手势监听
+        let tap = UITapGestureRecognizer(target: self, action: #selector(clickImageView))
+        imageView.addGestureRecognizer(tap)
+        imageView.isUserInteractionEnabled = true
+    }
+    
+    func clickImageView() {
+        photoDelegate?.photoBrowserCellDidTapImageView()
     }
     
     required init?(coder aDecoder: NSCoder) {

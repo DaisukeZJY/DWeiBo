@@ -49,6 +49,7 @@ class PhotoBrowserViewController: UIViewController {
         // 注册cell
         collectionView.dataSource = self
         collectionView.register(PhotoBrowserCell.self, forCellWithReuseIdentifier: kCellReuseIdentifier)
+        
     }
     
     func close() {
@@ -78,7 +79,7 @@ class PhotoBrowserLayout: UICollectionViewFlowLayout {
     
 }
 
-extension PhotoBrowserViewController: UICollectionViewDataSource {
+extension PhotoBrowserViewController: UICollectionViewDataSource, PhotoBrowserCellDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageUrls!.count
@@ -88,6 +89,12 @@ extension PhotoBrowserViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCellReuseIdentifier, for: indexPath) as! PhotoBrowserCell
         cell.imageURL = imageUrls![indexPath.item]
         cell.backgroundColor = UIColor.randomColor()
+        cell.photoDelegate = self
         return cell
+    }
+    
+    // MARK: - PhotoBrowserCellDelegate
+    func photoBrowserCellDidTapImageView() {
+        close()
     }
 }
