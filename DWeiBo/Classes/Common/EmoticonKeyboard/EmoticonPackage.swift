@@ -39,6 +39,14 @@ class EmoticonPackage: NSObject {
     class func packages() -> [EmoticonPackage] {
         var list = [EmoticonPackage]()
         
+        // 设置最近的表情包
+        let pa = EmoticonPackage(id: "")
+        pa.groupName = "最近"
+        // 追加表情
+        pa.appendEmptyEmoticons()
+        list.append(pa)
+        
+        
         // 读取emoticons.plist文件
         let path = Bundle.main.path(forResource: "emoticons.plist", ofType: nil, inDirectory: "Emoticons.bundle")
         let dict = NSDictionary(contentsOfFile: path!)!
@@ -50,6 +58,8 @@ class EmoticonPackage: NSObject {
             let package = EmoticonPackage(id: dic["id"] as! String)
             // 加载表情数组
             package.loadEmoticons()
+            // 追加空白模型
+            package.appendEmptyEmoticons()
             // 添加表情包
             list.append(package)
         }
@@ -68,8 +78,31 @@ class EmoticonPackage: NSObject {
         // 实例化表情数组
         emoticons = [Emoticon]()
         // 遍历数组
+        var index = 0
         for dic in array {
             emoticons?.append(Emoticon(id:id!, dict: dic))
+            index += 1
+            if index == 20 {
+                // 插入删除按钮
+                emoticons?.append(Emoticon(isRemoveBtn: true))
+                index = 0
+            }
+        }
+    }
+    
+    /// 追加空白按钮，方便界面布局，如果一个界面的图标不足20个，补足，最后添加一个删除按钮
+    private func appendEmptyEmoticons() {
+        if emoticons == nil {
+            emoticons = [Emoticon]()
+        }
+        let count = emoticons!.count % 21
+        if count > 0 || emoticons!.count == 0 {
+            for _ in count..<20 {
+                // 追加空白按钮
+                emoticons?.append(Emoticon(isRemoveBtn: false))
+            }
+            // 追加一个删除按钮
+            emoticons?.append(Emoticon(isRemoveBtn: true))
         }
     }
     
@@ -114,6 +147,12 @@ class Emoticon: NSObject {
         return png == nil ? nil : (EmoticonPackage.bundlePath().appendingPathComponent(id!) as NSString).appendingPathComponent(png!)
     }
     
+    /// 是否删除按钮的标记
+    var removeBtn = false
+    
+    init(isRemoveBtn:Bool) {
+        self.removeBtn = isRemoveBtn
+    }
     
     init(id:String, dict:[String : String]) {
         super.init()

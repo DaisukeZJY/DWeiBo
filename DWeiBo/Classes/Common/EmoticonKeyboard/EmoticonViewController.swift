@@ -38,7 +38,7 @@ class EmoticonViewController: UIViewController {
         
         setupUI()
         
-        
+        EmoticonPackage.packages()
         
     }
     
@@ -148,6 +148,12 @@ class EmoticonCell: UICollectionViewCell {
             }
             // 设置emoji，直接过滤调用cell重用的问题
             emoticonBtn.setTitle(emoticon?.emoji ?? "", for: UIControlState.normal)
+            
+            // 设置删除按钮
+            if emoticon!.removeBtn {
+                emoticonBtn.setImage(UIImage(named: "compose_emoticon_delete"), for: UIControlState.normal)
+                emoticonBtn.setImage(UIImage(named: "compose_emoticon_delete_highlighted"), for: UIControlState.highlighted)
+            }
         }
     }
     
@@ -163,5 +169,9 @@ class EmoticonCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private lazy var emoticonBtn = UIButton()
+    private lazy var emoticonBtn: UIButton = {
+        let btn = UIButton()
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 32)
+        return btn
+    }()
 }
