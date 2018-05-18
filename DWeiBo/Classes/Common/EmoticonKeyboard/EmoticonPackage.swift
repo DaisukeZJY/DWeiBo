@@ -69,7 +69,7 @@ class EmoticonPackage: NSObject {
         emoticons = [Emoticon]()
         // 遍历数组
         for dic in array {
-            emoticons?.append(Emoticon(dict: dic))
+            emoticons?.append(Emoticon(id:id!, dict: dic))
         }
     }
     
@@ -79,7 +79,7 @@ class EmoticonPackage: NSObject {
     }
     
     /// 返回表情包路径
-    private class func bundlePath() -> NSString {
+    class func bundlePath() -> NSString {
         return (Bundle.main.bundlePath as NSString).appendingPathComponent("Emoticons.bundle") as NSString
     }
     
@@ -94,10 +94,30 @@ class Emoticon: NSObject {
     /// 表情图片，在APP中进行图文混排的图片
     var png:String?
     /// UNICODE编码字符串
-    var code:String?
+    var code:String? {
+        didSet{
+            // 扫描器，可以扫描指定字符串中特定的文字
+            let scanner = Scanner(string: code!)
+            // 扫描整数
+            var result: UInt32 = 0
+            scanner.scanHexInt32(&result)
+            // 生成字符串
+            emoji = "\(Character(UnicodeScalar(result)!))"
+        }
+    }
     
-    init(dict:[String : String]) {
+    /// emoji字符串
+    var emoji:String?
+    
+    /// 图片的完整路径
+    var imagePath:String? {
+        return png == nil ? nil : (EmoticonPackage.bundlePath().appendingPathComponent(id!) as NSString).appendingPathComponent(png!)
+    }
+    
+    
+    init(id:String, dict:[String : String]) {
         super.init()
+        self.id = id
         // 使用KVC设置属性之前，必须调用super.init()
         setValuesForKeys(dict)
     }

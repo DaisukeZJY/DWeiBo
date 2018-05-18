@@ -11,6 +11,24 @@ import UIKit
 let kEmoticonCellReuseIdentifier = "kEmoticonCellReuseIdentifier"
 
 class EmoticonViewController: UIViewController {
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        // 十六进制的字符串
+//        let code = "0x2600"
+//
+//        // 扫描器，可以扫描指定字符串中特定文字
+//        let scannser = Scanner(string: code)
+//
+//        // 扫描整数
+//        var result: UInt32 = 0
+//        scannser.scanHexInt32(&result)
+//
+//        print(result)
+//        // 生成字符串
+//        let str = "\(Character(UnicodeScalar(result)!))"
+//        print(str)
+//
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +37,8 @@ class EmoticonViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setupUI()
+        
+        
         
     }
     
@@ -74,16 +94,22 @@ class EmoticonViewController: UIViewController {
     // MARK: - 懒加载
     private lazy var toolBar = UIToolbar()
     private lazy var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: EmoticonLayout())
+    lazy var packages: [EmoticonPackage] = EmoticonPackage.packages()
 }
 
 extension EmoticonViewController: UICollectionViewDataSource{
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return packages.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 21 * 3
+        return packages[section].emoticons?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kEmoticonCellReuseIdentifier, for: indexPath) as! EmoticonCell
         cell.backgroundColor = (indexPath.item % 2 == 0) ? UIColor.red : UIColor.blue
+        cell.emoticon = packages[indexPath.section].emoticons![indexPath.item]
         return cell
     }
     
@@ -110,6 +136,21 @@ private class EmoticonLayout: UICollectionViewFlowLayout {
 
 
 class EmoticonCell: UICollectionViewCell {
+    
+    var emoticon: Emoticon? {
+        didSet{
+            // 设置图片
+            if let path = emoticon?.imagePath {
+                emoticonBtn.setImage(UIImage(named: path), for: UIControlState.normal)
+            } else {
+                // 防止cell的重用
+                emoticonBtn.setImage(nil, for: UIControlState.normal)
+            }
+            // 设置emoji，直接过滤调用cell重用的问题
+            emoticonBtn.setTitle(emoticon?.emoji ?? "", for: UIControlState.normal)
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
