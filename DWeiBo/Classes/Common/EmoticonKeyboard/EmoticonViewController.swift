@@ -73,8 +73,8 @@ class EmoticonViewController: UIViewController {
         var index = 0
         for str in ["最近", "默认", "emoji", "浪小花"] {
             let item = UIBarButtonItem(title: str, style: UIBarButtonItemStyle.plain, target: self, action: #selector(clickItem(item:)))
-            index += 1
             item.tag = index
+            index += 1
             items.append(item)
             items.append(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil))
         }
@@ -89,6 +89,9 @@ class EmoticonViewController: UIViewController {
     
     func clickItem(item: UIBarButtonItem) {
         print(item.tag)
+        let indexPath = NSIndexPath(item: 0, section: item.tag)
+        collectionView.scrollToItem(at: indexPath as IndexPath, at: UICollectionViewScrollPosition.left, animated: true)
+        
     }
 
     // MARK: - 懒加载
@@ -151,8 +154,8 @@ class EmoticonCell: UICollectionViewCell {
             
             // 设置删除按钮
             if emoticon!.removeBtn {
-                emoticonBtn.setImage(UIImage(named: "compose_emoticon_delete"), for: UIControlState.normal)
-                emoticonBtn.setImage(UIImage(named: "compose_emoticon_delete_highlighted"), for: UIControlState.highlighted)
+                emoticonBtn.setImage(UIImage(named: "compose_emotion_delete"), for: UIControlState.normal)
+                emoticonBtn.setImage(UIImage(named: "compose_emotion_delete_highlighted"), for: UIControlState.highlighted)
             }
         }
     }

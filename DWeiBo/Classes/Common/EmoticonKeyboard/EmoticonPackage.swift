@@ -42,6 +42,7 @@ class EmoticonPackage: NSObject {
         // 设置最近的表情包
         let pa = EmoticonPackage(id: "")
         pa.groupName = "最近"
+        pa.emoticons = [Emoticon]()
         // 追加表情
         pa.appendEmptyEmoticons()
         list.append(pa)
@@ -80,13 +81,14 @@ class EmoticonPackage: NSObject {
         // 遍历数组
         var index = 0
         for dic in array {
-            emoticons?.append(Emoticon(id:id!, dict: dic))
-            index += 1
             if index == 20 {
                 // 插入删除按钮
                 emoticons?.append(Emoticon(isRemoveBtn: true))
                 index = 0
             }
+            
+            emoticons?.append(Emoticon(id:id!, dict: dic))
+            index += 1
         }
     }
     
@@ -151,6 +153,7 @@ class Emoticon: NSObject {
     var removeBtn = false
     
     init(isRemoveBtn:Bool) {
+        super.init()
         self.removeBtn = isRemoveBtn
     }
     
