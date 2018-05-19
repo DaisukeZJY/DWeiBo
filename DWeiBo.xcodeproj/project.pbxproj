@@ -31,6 +31,8 @@
 		7EDBA5D320AE7F2200D2619D /* EmoticonPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBA5D220AE7F2200D2619D /* EmoticonPackage.swift */; };
 		7EDC452F1DC8918A002F256D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC452E1DC8918A002F256D /* BaseViewController.swift */; };
 		7EDC45311DC89264002F256D /* VisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC45301DC89264002F256D /* VisitorView.swift */; };
+		7EDCE86520AFD0E10007768C /* EmoticonTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDCE86420AFD0E10007768C /* EmoticonTextAttachment.swift */; };
+		7EDCE86720AFD87F0007768C /* UITextView+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDCE86620AFD87F0007768C /* UITextView+Category.swift */; };
 		7EE02C1420ADA1C10058C4FB /* UIBarButtonItem+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE02C0D20ADA1C10058C4FB /* UIBarButtonItem+Category.swift */; };
 		7EE02C1520ADA1C10058C4FB /* UILabel+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE02C0E20ADA1C10058C4FB /* UILabel+Category.swift */; };
 		7EE02C1620ADA1C10058C4FB /* UIColor+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE02C0F20ADA1C10058C4FB /* UIColor+Category.swift */; };
@@ -102,6 +104,8 @@
 		7EDBA5D220AE7F2200D2619D /* EmoticonPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmoticonPackage.swift; sourceTree = "<group>"; };
 		7EDC452E1DC8918A002F256D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EDC45301DC89264002F256D /* VisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
+		7EDCE86420AFD0E10007768C /* EmoticonTextAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmoticonTextAttachment.swift; sourceTree = "<group>"; };
+		7EDCE86620AFD87F0007768C /* UITextView+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Category.swift"; sourceTree = "<group>"; };
 		7EE02C0D20ADA1C10058C4FB /* UIBarButtonItem+Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Category.swift"; sourceTree = "<group>"; };
 		7EE02C0E20ADA1C10058C4FB /* UILabel+Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Category.swift"; sourceTree = "<group>"; };
 		7EE02C0F20ADA1C10058C4FB /* UIColor+Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Category.swift"; sourceTree = "<group>"; };
@@ -324,6 +328,8 @@
 				7EE02C1B20ADA2350058C4FB /* Emoticons.bundle */,
 				7EE02C1D20ADA3370058C4FB /* EmoticonViewController.swift */,
 				7EDBA5D220AE7F2200D2619D /* EmoticonPackage.swift */,
+				7EDCE86420AFD0E10007768C /* EmoticonTextAttachment.swift */,
+				7EDCE86620AFD87F0007768C /* UITextView+Category.swift */,
 			);
 			path = EmoticonKeyboard;
 			sourceTree = "<group>";
@@ -620,6 +626,8 @@
 				7EC1B6FE1DC1A7EA00D39997 /* MainViewController.swift in Sources */,
 				7EE02C1E20ADA3370058C4FB /* EmoticonViewController.swift in Sources */,
 				7EC1B6CA1DC1A5F400D39997 /* ViewController.swift in Sources */,
+				7EDCE86720AFD87F0007768C /* UITextView+Category.swift in Sources */,
+				7EDCE86520AFD0E10007768C /* EmoticonTextAttachment.swift in Sources */,
 				7EC1B7021DC1A85300D39997 /* MessageTableViewController.swift in Sources */,
 				7EE02C1520ADA1C10058C4FB /* UILabel+Category.swift in Sources */,
 				7EE02C1A20ADA1C10058C4FB /* String+Category.swift in Sources */,

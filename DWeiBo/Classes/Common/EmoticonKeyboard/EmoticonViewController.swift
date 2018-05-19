@@ -12,23 +12,18 @@ let kEmoticonCellReuseIdentifier = "kEmoticonCellReuseIdentifier"
 
 class EmoticonViewController: UIViewController {
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        // 十六进制的字符串
-//        let code = "0x2600"
-//
-//        // 扫描器，可以扫描指定字符串中特定文字
-//        let scannser = Scanner(string: code)
-//
-//        // 扫描整数
-//        var result: UInt32 = 0
-//        scannser.scanHexInt32(&result)
-//
-//        print(result)
-//        // 生成字符串
-//        let str = "\(Character(UnicodeScalar(result)!))"
-//        print(str)
-//
-//    }
+    /// 定义一个闭包属性，用于传递选中的表情模型
+    var emoticonDidSelectedCallBack: (_ emoticon: Emoticon)->()
+    
+    init(callBack:@escaping (_ emoticon: Emoticon)->()) {
+        self.emoticonDidSelectedCallBack = callBack
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +33,7 @@ class EmoticonViewController: UIViewController {
         
         setupUI()
         
-        EmoticonPackage.packages()
+//        EmoticonPackage.packages()
         
     }
     
@@ -63,7 +58,7 @@ class EmoticonViewController: UIViewController {
         // 初始化工具条
         setupToolbar()
         
-        setupCollectionView()
+//        setupCollectionView()
     }
 
     private func setupToolbar() {
@@ -82,25 +77,33 @@ class EmoticonViewController: UIViewController {
         toolBar.items = items
     }
     
-    private func setupCollectionView() {
-        collectionView.register(EmoticonCell.self, forCellWithReuseIdentifier: kEmoticonCellReuseIdentifier)
-        collectionView.dataSource = self
-    }
+//    private func setupCollectionView() {
+//        collectionView.register(EmoticonCell.self, forCellWithReuseIdentifier: kEmoticonCellReuseIdentifier)
+//        collectionView.dataSource = self
+//    }
     
     func clickItem(item: UIBarButtonItem) {
         print(item.tag)
         let indexPath = NSIndexPath(item: 0, section: item.tag)
         collectionView.scrollToItem(at: indexPath as IndexPath, at: UICollectionViewScrollPosition.left, animated: true)
-        
     }
 
     // MARK: - 懒加载
     private lazy var toolBar = UIToolbar()
-    private lazy var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: EmoticonLayout())
+//    private lazy var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: EmoticonLayout())
+    
+    lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: EmoticonLayout())
+        collectionView.register(EmoticonCell.self, forCellWithReuseIdentifier: kEmoticonCellReuseIdentifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
     lazy var packages: [EmoticonPackage] = EmoticonPackage.packages()
 }
 
-extension EmoticonViewController: UICollectionViewDataSource{
+extension EmoticonViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return packages.count
     }
@@ -114,6 +117,13 @@ extension EmoticonViewController: UICollectionViewDataSource{
         cell.backgroundColor = (indexPath.item % 2 == 0) ? UIColor.red : UIColor.blue
         cell.emoticon = packages[indexPath.section].emoticons![indexPath.item]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // 获取表情模型
+        let emoticon = packages[indexPath.section].emoticons![indexPath.item]
+        // 执行闭包
+        emoticonDidSelectedCallBack(emoticon)
     }
     
 }
@@ -166,6 +176,7 @@ class EmoticonCell: UICollectionViewCell {
         contentView.addSubview(emoticonBtn)
         emoticonBtn.frame = bounds.insetBy(dx: 4, dy: 4)
         emoticonBtn.backgroundColor = UIColor.white
+        emoticonBtn.isUserInteractionEnabled = false
     }
     
     required init?(coder aDecoder: NSCoder) {
