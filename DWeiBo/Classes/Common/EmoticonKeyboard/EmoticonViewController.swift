@@ -122,6 +122,9 @@ extension EmoticonViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 获取表情模型
         let emoticon = packages[indexPath.section].emoticons![indexPath.item]
+        // 处理最近表情，将当前使用的表情添加到最近表情的数组中
+        emoticon.times += 1
+        packages[0].appendEmoticons(emoticon: emoticon)
         // 执行闭包
         emoticonDidSelectedCallBack(emoticon)
     }

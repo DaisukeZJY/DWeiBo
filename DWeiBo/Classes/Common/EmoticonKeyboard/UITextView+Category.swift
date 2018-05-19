@@ -12,6 +12,12 @@ import Foundation
 extension UITextView {
     /// 插入表情
     func insertEmoticon(emoticon:Emoticon, font:CGFloat) {
+        // 处理删除按钮
+        if emoticon.removeBtn {
+            deleteBackward()
+        }
+        
+        // 判断当前点击是否是emoji表情
         if emoticon.emoji != nil {
             self.replace(self.selectedTextRange!, withText: emoticon.emoji!)
         }

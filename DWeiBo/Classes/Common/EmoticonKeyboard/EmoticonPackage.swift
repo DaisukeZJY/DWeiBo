@@ -108,6 +108,36 @@ class EmoticonPackage: NSObject {
         }
     }
     
+    /// 用于添加最近表情
+    func appendEmoticons(emoticon: Emoticon) {
+        // 判断是否是删除按钮
+        if emoticon.removeBtn {
+            return
+        }
+        
+        // 判断当前点击的表情是否已经添加到最近数组中
+        let contains = emoticons!.contains(emoticon)
+        if !contains {
+            // 删除删除按钮
+            emoticons?.removeLast()
+            emoticons?.append(emoticon)
+        }
+        
+        // 对数组进行排序
+        var result = emoticons?.sorted(by: { (e1, e2) -> Bool in
+            return e1.times > e2.times
+        })
+        
+        // 删除多余的表情
+        if !contains {
+            result?.removeLast()
+            result?.append(Emoticon(isRemoveBtn: true))
+        }
+        
+        emoticons = result
+    }
+    
+    
     /// 返回info.plist路径
     private func plistPath() -> String {
         return (EmoticonPackage.bundlePath().appendingPathComponent(id!) as NSString).appendingPathComponent("info.plist")
@@ -151,6 +181,9 @@ class Emoticon: NSObject {
     
     /// 是否删除按钮的标记
     var removeBtn = false
+    
+    /// 记录当前表情被使用次数
+    var times:Int = 0
     
     init(isRemoveBtn:Bool) {
         super.init()
