@@ -12,6 +12,7 @@
 		7E0D043E20A1A1A2004B69F3 /* WelcomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */; };
 		7E8EF5E420AC220400F33A74 /* PhotoBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EF5E320AC220400F33A74 /* PhotoBrowserViewController.swift */; };
 		7E8EF5E620AC30B800F33A74 /* PhotoBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EF5E520AC30B800F33A74 /* PhotoBrowserCell.swift */; };
+		7E9CE38F20B268C8003B4D28 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9CE38E20B268C8003B4D28 /* PhotoSelectorController.swift */; };
 		7EC1B6C81DC1A5F400D39997 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1B6C71DC1A5F400D39997 /* AppDelegate.swift */; };
 		7EC1B6CA1DC1A5F400D39997 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1B6C91DC1A5F400D39997 /* ViewController.swift */; };
 		7EC1B6CF1DC1A5F400D39997 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC1B6CE1DC1A5F400D39997 /* Assets.xcassets */; };
@@ -79,6 +80,7 @@
 		7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomViewController.swift; sourceTree = "<group>"; };
 		7E8EF5E320AC220400F33A74 /* PhotoBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserViewController.swift; sourceTree = "<group>"; };
 		7E8EF5E520AC30B800F33A74 /* PhotoBrowserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserCell.swift; sourceTree = "<group>"; };
+		7E9CE38E20B268C8003B4D28 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		7EC1B6C41DC1A5F400D39997 /* DWeiBo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DWeiBo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC1B6C71DC1A5F400D39997 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC1B6C91DC1A5F400D39997 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,14 @@
 			path = PhotoBrowser;
 			sourceTree = "<group>";
 		};
+		7E9CE38D20B268AD003B4D28 /* PhotoSelector */ = {
+			isa = PBXGroup;
+			children = (
+				7E9CE38E20B268C8003B4D28 /* PhotoSelectorController.swift */,
+			);
+			path = PhotoSelector;
+			sourceTree = "<group>";
+		};
 		7EC1B6BB1DC1A5F400D39997 = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +256,7 @@
 		7EC1B6F61DC1A72200D39997 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7E9CE38D20B268AD003B4D28 /* PhotoSelector */,
 				7EE02C0B20ADA1AD0058C4FB /* EmoticonKeyboard */,
 			);
 			path = Common;
@@ -657,6 +668,7 @@
 				7E8EF5E620AC30B800F33A74 /* PhotoBrowserCell.swift in Sources */,
 				7ED8249520A05C29001FE12D /* UserAccount.swift in Sources */,
 				7EDBA5D320AE7F2200D2619D /* EmoticonPackage.swift in Sources */,
+				7E9CE38F20B268C8003B4D28 /* PhotoSelectorController.swift in Sources */,
 				7EDCE86A20B010AD0007768C /* ComposeViewController.swift in Sources */,
 				7E0D043E20A1A1A2004B69F3 /* WelcomViewController.swift in Sources */,
 			);
