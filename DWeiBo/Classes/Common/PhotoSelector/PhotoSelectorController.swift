@@ -105,9 +105,34 @@ extension PhotoSelectorController: UICollectionViewDataSource, PhotoSelectorCell
         // 获取图片
 //        print(info[UIImagePickerControllerOriginalImage] as Any)
         
+        /*
+         UIImageJPEGRepresentation(, )会严重影响图片质量
+         1、解压缩性能消耗太大，苹果不推荐
+         2、JPEG压缩图片是不保真的，压缩后可能很难看
+         
+         写入到本地
+         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+         
+         let data1 = UIImageJPEGRepresentation(image, 1.0)
+         do {
+         try data1?.write(to: URL(string: "Users/Daisuke/Desktop/1.jpg")!, options: Data.WritingOptions.atomic)
+         } catch {
+         print("捕捉到异常")
+         }
+         
+         1、关于应用程序内存，UI的APP空的程序运行占用20M左右，一般程序消耗100M以内都是可以接受的
+         2、内存飙升到500M接受到第一次内存警告，内存释放后的结果120M，程序仍然能够正常运行
+         
+         */
+        
+        
+        
+        
         // 将图片保存到数组中
         if photos.count < kMaxPhotoSelectCount - 1 {
-            photos.append(info[UIImagePickerControllerOriginalImage] as! UIImage)
+            var image = info[UIImagePickerControllerOriginalImage] as! UIImage
+            image = image.scaleImageToWidth(width: 300)
+            photos.append(image)
             collectionView.reloadData()
         }
         // 关闭
