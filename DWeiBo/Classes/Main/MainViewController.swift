@@ -170,7 +170,7 @@ class MainViewController: UITabBarController {
         print(#function)
         print("点击按钮")
 //        let composeVC = ComposeViewController()
-        let composeVC = PhotoSelectorController()
+        let composeVC = ViewController()
         let nav = UINavigationController(rootViewController: composeVC)
         present(nav, animated: true, completion: nil)
         

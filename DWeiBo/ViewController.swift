@@ -13,6 +13,129 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let str = "@jack12:【动物尖叫合辑】#肥猪流#猫头鹰这么尖叫[偷笑]、@南哥: 老鼠这么尖叫、兔子这么尖叫[吃惊]、@花满楼: 莫名奇#小笼包#妙的笑到最后[挖鼻屎]！~ http://t.cn/zYBuKZ8"
+        urlRegex(str: str) // http://t.cn/zYBuKZ8
+        emoticonRegex(str: str)
+        /*
+         @jack12:
+         #肥猪流#
+         [偷笑]
+         @南哥:
+         [吃惊]
+         @花满楼:
+         #小笼包#
+         [挖鼻屎]
+         http://t.cn/zYBuKZ8
+         */
+    }
+    
+    func urlRegex(str:String) {
+        do {
+            // 创建匹配对象
+            /*
+             NSDataDetector：是NSRegularExpression的子类，里面能够匹配URL,电话,日期,地址
+             */
+            let dataDetector = try NSDataDetector(types: NSTextCheckingTypes(NSTextCheckingResult.CheckingType.link.rawValue))
+            
+            // 匹配所有的URL
+            let array = dataDetector.matches(in: str, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, str.count))
+            if array.count > 0 {
+                for checking in array {
+                    print((str as NSString).substring(with: checking.range))
+                }
+            }
+            
+        } catch  {
+            print(error)
+        }
+    }
+    
+    func emoticonRegex(str:String) {
+        do {
+            /*
+             - . 匹配任意字符，除了换行
+             - * 匹配任意长度的内容
+             - ? 尽量少的匹配
+             */
+            // 1.创建规则
+            // 1.1表情规则
+            let emoticonPattern = "\\[.*?\\]"
+            // 1.2用户名规则
+            let atPattern = "@.*?:"
+            // 1.3话题规则
+            let topicPattern = "#.*?#"
+            // 1.4url规则
+            let urlPattern = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?"
+            let pattern = emoticonPattern + "|" + atPattern + "|" + topicPattern + "|" + urlPattern
+            
+            // 创建正则表达式对象
+            let regex = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options(rawValue: 0))
+            // 开始匹配
+            let array = regex.matches(in: str, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, str.count))
+            if array.count > 0 {
+                for checking in array {
+                    print((str as NSString).substring(with: checking.range))
+                }
+            }
+            
+        } catch  {
+            print(error)
+        }
+    }
+    
+    
+    func test() {
+        let string = "123123s1728a19"
+        
+        do {
+            let pattern = "[1-9][0-9]{4,14}"
+            // 创建正则表达式对象
+            let regex = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
+            
+            // 开始匹配
+            // 返回正确匹配的个数
+            
+            let number = regex.numberOfMatches(in: string, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, string.count))
+            if number == 0 {
+                return
+            }
+            print("匹配个数：\(number)")
+            
+            
+            // 返回第一个匹配的结果
+            if let res = regex.firstMatch(in: string, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, string.count)) {
+                print((string as NSString).substring(with: res.range))
+            } else {
+                return
+            }
+            
+            // 返回第一个正确匹配结果字符串的NSRange
+            let res = regex.rangeOfFirstMatch(in: string, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, string.count))
+            print((string as NSString).substring(with: res))
+            
+            // 返回所有匹配结果的集合（适合从一段字符串中提取我们想要匹配的所有数据）
+            let array = regex.matches(in: string, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, string.count))
+            for res in array {
+                print((string as NSString).substring(with: res.range))
+            }
+            
+            /*
+             执行每一个结果集
+             result：匹配结果
+             matchingFlag：匹配状态
+             pointer：执行停止控制
+             */
+            regex.enumerateMatches(in: string, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, string.count)) { (result, matchingFlag, pointer) in
+                print((string as NSString).substring(with: (result?.range)!))
+                print(matchingFlag)
+                print(pointer)
+            }
+            
+            
+        } catch  {
+            print(error)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
