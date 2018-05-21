@@ -63,7 +63,7 @@ class DiscoverTableViewController: BaseViewController {
         [unowned self]
         (emoticon) in
         
-        self.textView.insertEmoticon(emoticon: emoticon, font: 20)
+//        self.textView.insertEmoticon(emoticon: emoticon, font: 20)
         
 //        if emoticon.emoji != nil {
 //            self.textView.replace(self.textView.selectedTextRange!, withText: emoticon.emoji!)

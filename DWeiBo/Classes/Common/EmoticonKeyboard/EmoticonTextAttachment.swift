@@ -13,13 +13,14 @@ class EmoticonTextAttachment: NSTextAttachment {
     /// 保存对应表情的文字
     var chs:String?
     
-    class func imageText(emoticon:Emoticon, font:CGFloat) -> NSAttributedString {
+    class func imageText(emoticon:Emoticon, font:UIFont) -> NSAttributedString {
         // 创建附件
         let attachment = EmoticonTextAttachment()
         attachment.chs = emoticon.chs
         attachment.image = UIImage(contentsOfFile: emoticon.imagePath!)
         // 设置附件大小
-        attachment.bounds = CGRect(x: 0, y: -4, width: font, height: font)
+        let s = font.lineHeight
+        attachment.bounds = CGRect(x: 0, y: -4, width: s, height: s)
         // 根据附件创建属性字符串
         return NSAttributedString(attachment: attachment)
     }

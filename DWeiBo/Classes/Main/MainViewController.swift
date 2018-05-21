@@ -151,7 +151,7 @@ class MainViewController: UITabBarController {
         
         // 设置前置图片
         button.setImage(UIImage(named:"tabbar_compose_icon_add"), for: UIControlState.normal)
-    button.setImage(UIImage(named:"tabbar_compose_icon_add_highlighted"), for: UIControlState.highlighted)
+        button.setImage(UIImage(named:"tabbar_compose_icon_add_highlighted"), for: UIControlState.highlighted)
         
         // 设置背景图片
         button.setBackgroundImage(UIImage(named:"tabbar_compose_button"), for: UIControlState.normal)
@@ -169,6 +169,10 @@ class MainViewController: UITabBarController {
     func composeBtnClick() {
         print(#function)
         print("点击按钮")
+        let composeVC = ComposeViewController()
+        let nav = UINavigationController(rootViewController: composeVC)
+        present(nav, animated: true, completion: nil)
+        
     }
 
 }

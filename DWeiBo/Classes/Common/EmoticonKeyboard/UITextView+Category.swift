@@ -11,7 +11,7 @@ import Foundation
 
 extension UITextView {
     /// 插入表情
-    func insertEmoticon(emoticon:Emoticon, font:CGFloat) {
+    func insertEmoticon(emoticon:Emoticon) {
         // 处理删除按钮
         if emoticon.removeBtn {
             deleteBackward()
@@ -26,7 +26,7 @@ extension UITextView {
         if emoticon.png != nil {
             
             // 根据附件创建属性字符串
-            let imageText = EmoticonTextAttachment.imageText(emoticon: emoticon, font: font)
+            let imageText = EmoticonTextAttachment.imageText(emoticon: emoticon, font: font!)
             
             // 拿到当前所有内容
             let strM = NSMutableAttributedString(attributedString: self.attributedText)
@@ -36,7 +36,7 @@ extension UITextView {
             strM.replaceCharacters(in: range, with: imageText)
             
             // 属性字符串有自己默认的尺寸
-            strM.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 19), range: NSMakeRange(range.location, 1))
+            strM.addAttribute(NSFontAttributeName, value: font!, range: NSMakeRange(range.location, 1))
             
             // 将替换后的字符串赋值给textView
             self.attributedText = strM

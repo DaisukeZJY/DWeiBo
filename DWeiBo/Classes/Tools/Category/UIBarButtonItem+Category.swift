@@ -18,4 +18,18 @@ extension UIBarButtonItem {
         btn.sizeToFit()
         return UIBarButtonItem(customView: btn)
     }
+    
+    convenience init(imageName:String?, highlightedImageName:String?, tagget:AnyObject?, actionName:String?) {
+        
+        let btn = UIButton()
+        btn.setImage(UIImage(named: imageName!), for: UIControlState.normal)
+        let highName = highlightedImageName ?? imageName! + "_highlighted"
+        btn.setImage(UIImage(named: highName), for: UIControlState.highlighted)
+        btn.sizeToFit()
+        // 添加监听方法
+        if actionName != nil {
+            btn.addTarget(tagget, action: Selector(actionName!), for: UIControlEvents.touchUpInside)
+        }
+        self.init(customView: btn)
+    }
 }
