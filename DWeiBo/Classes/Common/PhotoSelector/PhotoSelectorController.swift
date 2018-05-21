@@ -9,6 +9,8 @@
 import UIKit
 
 let kPhotoSelectorCellReuseIdentifier = "kPhotoSelectorCellReuseIdentifier"
+/// 最大选择照片数量
+private let kMaxPhotoSelectCount = 9
 
 class PhotoSelectorController: UIViewController {
 
@@ -41,20 +43,22 @@ class PhotoSelectorController: UIViewController {
     
     // MARK: - 懒加载
     private lazy var layout = UICollectionViewFlowLayout()
-    private lazy var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
-    private lazy var photos = [UIImage]()
+    lazy var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
+    lazy var photos = [UIImage]()
     
 }
 
 extension PhotoSelectorController: UICollectionViewDataSource, PhotoSelectorCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return photos.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kPhotoSelectorCellReuseIdentifier, for: indexPath) as! PhotoSelectorCell
         cell.backgroundColor = UIColor.randomColor()
         cell.delegate = self
+        // 设置图片
+        cell.image = indexPath.item < photos.count ? photos[indexPath.item] : nil
         return cell
     }
     
@@ -84,16 +88,28 @@ extension PhotoSelectorController: UICollectionViewDataSource, PhotoSelectorCell
     }
     
     func photoSelectorRemovePhoto(cell: PhotoSelectorCell) {
+        // indexpatch
+        let indexPath = collectionView.indexPath(for: cell)
         
+        // 删除照片
+        photos.remove(at: indexPath!.item)
+        
+        // 更新
+        collectionView.reloadData()
     }
     
     // MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // 提示：所有关于相册的处理，都需要处理内存
-        print(info)
+//        print(info)
         // 获取图片
-        print(info[UIImagePickerControllerOriginalImage] as Any)
+//        print(info[UIImagePickerControllerOriginalImage] as Any)
         
+        // 将图片保存到数组中
+        if photos.count < kMaxPhotoSelectCount - 1 {
+            photos.append(info[UIImagePickerControllerOriginalImage] as! UIImage)
+            collectionView.reloadData()
+        }
         // 关闭
         dismiss(animated: true, completion: nil)
     }
@@ -108,6 +124,20 @@ protocol PhotoSelectorCellDelegate: NSObjectProtocol {
 }
 
 class PhotoSelectorCell: UICollectionViewCell {
+    
+    // 不能解包可选项 -> 将nil使用了惊叹号
+    var image:UIImage? {
+        didSet{
+            if image != nil {
+                photoBtn.setImage(image, for: UIControlState.normal)
+            } else {
+                photoBtn.setImage(UIImage(named: "compose_pic_add"), for: UIControlState.normal)
+                photoBtn.setImage(UIImage(named: "compose_pic_add_highlighted"), for: UIControlState.highlighted)
+            }
+            
+            removeBtn.isHidden = (image == nil)
+        }
+    }
     
     /// 定义代理
     weak var delegate: PhotoSelectorCellDelegate?
@@ -147,8 +177,9 @@ class PhotoSelectorCell: UICollectionViewCell {
     
     
     func selectPhoto() {
-        
-        delegate?.photoSelectorSelectPhoto!(cell: self)
+        if image == nil {
+            delegate?.photoSelectorSelectPhoto!(cell: self)
+        }
     }
     
     func removePhoto() {
