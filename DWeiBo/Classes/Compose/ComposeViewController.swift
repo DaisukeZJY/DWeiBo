@@ -11,6 +11,9 @@ import SVProgressHUD
 
 class ComposeViewController: UIViewController {
 
+    /// 工具栏底部约束
+    private var toolbarBottomCons:NSLayoutConstraint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,7 +26,17 @@ class ComposeViewController: UIViewController {
         setupNav()
         // 初始化输入框
         setupInputView()
+        // 初始化工具条
+        setupToolBar()
         
+        // 注册通知监听键盘
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChange(notify:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+    }
+    
+    deinit {
+        // 注销通知
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,18 +82,22 @@ class ComposeViewController: UIViewController {
     private func setupInputView() {
         view.addSubview(textView)
         textView.addSubview(placeholderLabel)
+        textView.alwaysBounceVertical = true
+        textView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
         
         // 布局子控件
         textView.xmg_Fill(view)
         placeholderLabel.xmg_AlignInner(type: XMG_AlignType.topLeft, referView: textView, size: nil, offset: CGPoint(x: 5, y: 8))
         
         // 设置输入视图辅助视图
-        textView.inputAccessoryView = setupToolBar()
+//        textView.inputAccessoryView = setupToolBar()
     }
     
-    private func setupToolBar() -> UIToolbar {
-        let tb = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
-        tb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+    private func setupToolBar() {
+        view.addSubview(toolbar)
+        
+//        let tb = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
+//        tb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
         let itemSettings = [["imageName": "compose_toolbar_picture", "action": "selectPicture"],
                             ["imageName": "compose_mentionbutton_background"],
                             ["imageName": "compose_trendbutton_background"],
@@ -96,8 +113,43 @@ class ComposeViewController: UIViewController {
         }
         // 删除末尾弹簧
         items.removeLast()
-        tb.items = items
-        return tb
+        toolbar.items = items
+        
+        // 布局toolbar
+        let width = UIScreen.main.bounds.width
+        let cons = toolbar.xmg_AlignInner(type: XMG_AlignType.bottomLeft, referView: view, size: CGSize(width: width, height: 44))
+        toolbarBottomCons = toolbar.xmg_Constraint(cons, attribute: NSLayoutAttribute.bottom)
+        
+    }
+    
+    func keyboardChange(notify: Notification) {
+        // 获取最终的frame - oc中将结构体保存在字典中，存成NSValue
+        let value = notify.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let rect = value.cgRectValue
+        
+        let height = UIScreen.main.bounds.height
+        toolbarBottomCons?.constant = -(height - rect.origin.y)
+        
+        // 更新页面
+        let duration = notify.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        
+        /*
+         工具条回弹是因为执行了两次动画，而系统自带的键盘的动画节奏（曲线） 7
+         7 在Apple API中并没有提供我们，但是我们可以用7 这种节奏的特点
+         ：如果连续执行两次动画，不管上一次有没有执行完毕，都会立刻执行下一次，也就是说上一次可能会被忽略
+         
+         如果将动画节奏设置为7，那么动画的时长无论如何都会自动修改为0.5
+         UIView动画的本质是核心动画，所以可以给核心动画设置动画节奏
+         */
+        
+        // 取出键盘的动画节奏
+        let curve = notify.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+        
+        UIView.animate(withDuration: duration.doubleValue) {
+            // 设置动画节奏
+            UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: curve.intValue)!)
+            self.view.layoutIfNeeded()
+        }
     }
     
     
@@ -129,7 +181,7 @@ class ComposeViewController: UIViewController {
     /// 切换表情键盘
     func inputEmoticon() {
         // 如果输入视图是nul，说明使用的是系统键盘
-        print(textView.inputView)
+//        print(textView.inputView)
         
         // 要切换键盘之前，需要先关闭键盘
         textView.resignFirstResponder()
@@ -160,6 +212,8 @@ class ComposeViewController: UIViewController {
         label.text = "分享新鲜事..."
         return label
     }()
+    
+    lazy var toolbar:UIToolbar = UIToolbar()
     
     /// 表情键盘
     lazy var emoticonKeyboradVC: EmoticonViewController = EmoticonViewController { [unowned self] (emoticon) in
