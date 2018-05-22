@@ -14,12 +14,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(customLabel)
-        customLabel.xmg_AlignInner(type: XMG_AlignType.topLeft, referView: view, size: CGSize(width: UIScreen.main.bounds.width, height: 50), offset: CGPoint(x: 0, y: 200))
+        customLabel.xmg_AlignInner(type: XMG_AlignType.topLeft, referView: view, size: CGSize(width: UIScreen.main.bounds.width, height: 200), offset: CGPoint(x: 0, y: 200))
+        
+        
+        
+        customLabel.text = "这是我的博客地址：http://daisuke.cn 欢迎来这里看看，记住是这里：http://daisuke.cn"
+        
         
         // Do any additional setup after loading the view, typically from a nib.
-        let str = "@jack12:【动物尖叫合辑】#肥猪流#猫头鹰这么尖叫[偷笑]、@南哥: 老鼠这么尖叫、兔子这么尖叫[吃惊]、@花满楼: 莫名奇#小笼包#妙的笑到最后[挖鼻屎]！~ http://t.cn/zYBuKZ8"
-        urlRegex(str: str) // http://t.cn/zYBuKZ8
-        contentRegex(str: str)
+//        let str = "@jack12:【动物尖叫合辑】#肥猪流#猫头鹰这么尖叫[偷笑]、@南哥: 老鼠这么尖叫、兔子这么尖叫[吃惊]、@花满楼: 莫名奇#小笼包#妙的笑到最后[挖鼻屎]！~ http://t.cn/zYBuKZ8"
+//        urlRegex(str: str) // http://t.cn/zYBuKZ8
+//        contentRegex(str: str)
         /*
          @jack12:
          #肥猪流#
@@ -202,8 +207,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    lazy var customLabel: UILabel = {
-        let label = UILabel()
+    lazy var customLabel: DDLabel = {
+        let label = DDLabel()
         label.backgroundColor = UIColor.darkGray
         label.font = UIFont.systemFont(ofSize: 20)
         return label

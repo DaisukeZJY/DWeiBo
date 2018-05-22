@@ -33,6 +33,7 @@
 		7EDBA5D320AE7F2200D2619D /* EmoticonPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBA5D220AE7F2200D2619D /* EmoticonPackage.swift */; };
 		7EDC452F1DC8918A002F256D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC452E1DC8918A002F256D /* BaseViewController.swift */; };
 		7EDC45311DC89264002F256D /* VisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC45301DC89264002F256D /* VisitorView.swift */; };
+		7EDC5CC320B3F4F1006A1120 /* DDLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC5CC220B3F4F1006A1120 /* DDLabel.swift */; };
 		7EDCE86520AFD0E10007768C /* EmoticonTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDCE86420AFD0E10007768C /* EmoticonTextAttachment.swift */; };
 		7EDCE86720AFD87F0007768C /* UITextView+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDCE86620AFD87F0007768C /* UITextView+Category.swift */; };
 		7EDCE86A20B010AD0007768C /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDCE86920B010AD0007768C /* ComposeViewController.swift */; };
@@ -109,6 +110,7 @@
 		7EDBA5D220AE7F2200D2619D /* EmoticonPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmoticonPackage.swift; sourceTree = "<group>"; };
 		7EDC452E1DC8918A002F256D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EDC45301DC89264002F256D /* VisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
+		7EDC5CC220B3F4F1006A1120 /* DDLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLabel.swift; sourceTree = "<group>"; };
 		7EDCE86420AFD0E10007768C /* EmoticonTextAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmoticonTextAttachment.swift; sourceTree = "<group>"; };
 		7EDCE86620AFD87F0007768C /* UITextView+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Category.swift"; sourceTree = "<group>"; };
 		7EDCE86920B010AD0007768C /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		7EC1B6F61DC1A72200D39997 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7EDC5CC120B3F4DC006A1120 /* Label */,
 				7E9CE38D20B268AD003B4D28 /* PhotoSelector */,
 				7EE02C0B20ADA1AD0058C4FB /* EmoticonKeyboard */,
 			);
@@ -337,6 +340,14 @@
 				7ED8249420A05C29001FE12D /* UserAccount.swift */,
 			);
 			path = OAuth;
+			sourceTree = "<group>";
+		};
+		7EDC5CC120B3F4DC006A1120 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				7EDC5CC220B3F4F1006A1120 /* DDLabel.swift */,
+			);
+			path = Label;
 			sourceTree = "<group>";
 		};
 		7EDCE86820B0109D0007768C /* Compose */ = {
@@ -660,6 +671,7 @@
 				7EDC452F1DC8918A002F256D /* BaseViewController.swift in Sources */,
 				7EC1B7091DC1ACDC00D39997 /* NullViewController.swift in Sources */,
 				7EF7AE9E20A530BD004BB001 /* StatusForwardTableViewCell.swift in Sources */,
+				7EDC5CC320B3F4F1006A1120 /* DDLabel.swift in Sources */,
 				7EDC45311DC89264002F256D /* VisitorView.swift in Sources */,
 				7EC1B7001DC1A84100D39997 /* ProfileTableViewController.swift in Sources */,
 				7ED8249120A04E75001FE12D /* OAuthViewController.swift in Sources */,
