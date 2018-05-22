@@ -35,6 +35,56 @@ class EmoticonPackage: NSObject {
         self.id = id
     }
     
+    static let packageList: [EmoticonPackage] = EmoticonPackage.packages()
+    class func emoticonRegex(str:String) ->NSAttributedString?{
+        let strM = NSMutableAttributedString(string: str)
+        
+        do {
+            // 创建规则
+            let pattern = "\\[.*?\\]"
+            // 创建正则对象
+            let regex = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options(rawValue: 0))
+            // 开始匹配
+            let array = regex.matches(in: str, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, str.count))
+            // 遍历结果数组
+            var count = array.count
+            while count > 0 {
+                // 拿到匹配结果
+                count -= 1
+                let res = array[count]
+                // 拿到range
+                let range = res.range
+                // 拿到匹配的字符串
+                let tempStr = (str as NSString).substring(with: range)
+                // 查找模型
+                if let emoticon = emotcionWithStr(str: tempStr){
+                    // 生成属性字符串
+                    let attstr = EmoticonTextAttachment.imageText(emoticon: emoticon, font: UIFont.systemFont(ofSize: 17))
+                    // 替换表情
+                    strM.replaceCharacters(in: range, with: attstr)
+                }
+            }
+            return strM
+        } catch  {
+            print(error)
+            return nil
+        }
+    }
+    
+    /// 根据指定字符串获得表情模型
+    class func emotcionWithStr(str:String) -> Emoticon? {
+        var emoticon:Emoticon?
+        for package in EmoticonPackage.packageList {
+            emoticon = package.emoticons?.filter({ (emo) -> Bool in
+                return emo.chs == str
+            }).last
+            if emoticon != nil {
+                break
+            }
+        }
+        return emoticon
+    }
+    
     /// 加载表情包·数组·
     class func packages() -> [EmoticonPackage] {
         var list = [EmoticonPackage]()

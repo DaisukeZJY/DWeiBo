@@ -12,10 +12,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(customLabel)
+        customLabel.xmg_AlignInner(type: XMG_AlignType.topLeft, referView: view, size: CGSize(width: UIScreen.main.bounds.width, height: 50), offset: CGPoint(x: 0, y: 200))
+        
         // Do any additional setup after loading the view, typically from a nib.
         let str = "@jack12:【动物尖叫合辑】#肥猪流#猫头鹰这么尖叫[偷笑]、@南哥: 老鼠这么尖叫、兔子这么尖叫[吃惊]、@花满楼: 莫名奇#小笼包#妙的笑到最后[挖鼻屎]！~ http://t.cn/zYBuKZ8"
         urlRegex(str: str) // http://t.cn/zYBuKZ8
-        emoticonRegex(str: str)
+        contentRegex(str: str)
         /*
          @jack12:
          #肥猪流#
@@ -27,6 +31,9 @@ class ViewController: UIViewController {
          [挖鼻屎]
          http://t.cn/zYBuKZ8
          */
+        
+//        emoticonRegex(str: "我[爱你]好久了[好爱哦]")
+//        EmoticonPackage
     }
     
     func urlRegex(str:String) {
@@ -50,7 +57,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func emoticonRegex(str:String) {
+    func contentRegex(str:String) {
         do {
             /*
              - . 匹配任意字符，除了换行
@@ -82,6 +89,58 @@ class ViewController: UIViewController {
             print(error)
         }
     }
+    
+    
+//    func emoticonRegex(str:String) {
+//        var strM = NSMutableAttributedString(string: str)
+//
+//        do {
+//            // 创建规则
+//            let pattern = "\\[.*?\\]"
+//            // 创建正则对象
+//            let regex = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options(rawValue: 0))
+//            // 开始匹配
+//            let array = regex.matches(in: str, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, str.count))
+//            // 遍历结果数组
+//            var count = array.count
+//            while count > 0 {
+//                // 拿到匹配结果
+//                count -= 1
+//                let res = array[count]
+//                // 拿到range
+//                let range = res.range
+//                // 拿到匹配的字符串
+//                let tempStr = (str as NSString).substring(with: range)
+//                // 查找模型
+//                if let emoticon = emotcionWithStr(str: tempStr){
+//                    // 生成属性字符串
+//                    let attstr = EmoticonTextAttachment.imageText(emoticon: emoticon, font: UIFont.systemFont(ofSize: 17))
+//                    // 替换表情
+//                    strM.replaceCharacters(in: range, with: attstr)
+//                }
+//                print(strM)
+//                self.customLabel.attributedText = strM
+//            }
+//
+//        } catch  {
+//            print(error)
+//        }
+//
+//    }
+//
+//    /// 根据指定字符串获得表情模型
+//    func emotcionWithStr(str:String) -> Emoticon? {
+//        var emoticon:Emoticon?
+//        for package in EmoticonPackage.packages() {
+//            emoticon = package.emoticons?.filter({ (emo) -> Bool in
+//                return emo.chs == str
+//            }).last
+//            if emoticon != nil {
+//                break
+//            }
+//        }
+//        return emoticon
+//    }
     
     
     func test() {
@@ -143,6 +202,12 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    lazy var customLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.darkGray
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
+    }()
 
 }
 

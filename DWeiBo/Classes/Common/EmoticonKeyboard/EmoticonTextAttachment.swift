@@ -22,6 +22,11 @@ class EmoticonTextAttachment: NSTextAttachment {
         let s = font.lineHeight
         attachment.bounds = CGRect(x: 0, y: -4, width: s, height: s)
         // 根据附件创建属性字符串
-        return NSAttributedString(attachment: attachment)
+        let imageText = NSAttributedString(attachment: attachment)
+        // 获得现在的属性文本
+        let strM = NSMutableAttributedString(attributedString: imageText)
+        // 设置表情图片的字体
+        strM.addAttribute(NSFontAttributeName, value: font, range: NSMakeRange(0, 1))
+        return strM
     }
 }

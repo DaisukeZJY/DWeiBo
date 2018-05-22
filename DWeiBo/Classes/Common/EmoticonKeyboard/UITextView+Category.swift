@@ -35,9 +35,6 @@ extension UITextView {
             let range = self.selectedRange
             strM.replaceCharacters(in: range, with: imageText)
             
-            // 属性字符串有自己默认的尺寸
-            strM.addAttribute(NSFontAttributeName, value: font!, range: NSMakeRange(range.location, 1))
-            
             // 将替换后的字符串赋值给textView
             self.attributedText = strM
             
