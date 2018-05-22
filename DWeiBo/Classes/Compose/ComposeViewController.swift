@@ -13,6 +13,8 @@ class ComposeViewController: UIViewController {
 
     /// 工具栏底部约束
     private var toolbarBottomCons:NSLayoutConstraint?
+    /// 图片选择器高度约束
+    private var photoViewHeightCons:NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +23,17 @@ class ComposeViewController: UIViewController {
         
         // 添加子控制器
         addChildViewController(emoticonKeyboradVC)
+        addChildViewController(photoSelectorVC)
         
         // 初始化导航栏
         setupNav()
+        
         // 初始化输入框
         setupInputView()
+        
+        // 初始化图片选择器
+        setupPhotoView()
+        
         // 初始化工具条
         setupToolBar()
         
@@ -42,8 +50,10 @@ class ComposeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // 主动唤起键盘
-        textView.becomeFirstResponder()
+        if photoViewHeightCons?.constant == 0 {
+            // 主动唤起键盘
+            textView.becomeFirstResponder()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,6 +63,7 @@ class ComposeViewController: UIViewController {
         textView.resignFirstResponder()
     }
     
+    // MARK: - 初始化方法
     
     private func setupNav() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: UIBarButtonItemStyle.plain, target: self, action: #selector(close))
@@ -91,6 +102,18 @@ class ComposeViewController: UIViewController {
         
         // 设置输入视图辅助视图
 //        textView.inputAccessoryView = setupToolBar()
+    }
+    
+    private func setupPhotoView(){
+        view.insertSubview(photoSelectorVC.view, belowSubview: toolbar)
+        
+        // 布局
+        let size = UIScreen.main.bounds.size
+        let width = size.width
+        let height:CGFloat = 0
+        let cons = photoSelectorVC.view.xmg_AlignInner(type: XMG_AlignType.bottomLeft, referView: view, size: CGSize(width: width, height: height))
+        photoViewHeightCons = photoSelectorVC.view.xmg_Constraint(cons, attribute: NSLayoutAttribute.height)
+        
     }
     
     private func setupToolBar() {
@@ -152,30 +175,36 @@ class ComposeViewController: UIViewController {
         }
     }
     
+    // MARK: - 导航栏按钮事件
     
     func close() {
         dismiss(animated: true, completion: nil)
     }
     
     func send() {
+        let text = textView.emoticonAttributeText()
+        let image = photoSelectorVC.photos.first
+        
         SVProgressHUD.show(withStatus: "正在发送。。。")
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
-        let path = "2/statuses/update.json"
-        let params = ["access_token": UserAccount.loadAccount()?.access_token, "status":textView.text]
-        NetworkTools.shareNetworkTools().post(path, parameters: params, progress: nil, success: { (_, json) in
-            SVProgressHUD.dismiss()
+        NetworkTools.shareNetworkTools().sendStatus(text: text, image: image, successCallBack: { (status) in
             // 提示用户发送成功
             SVProgressHUD.showSuccess(withStatus: "发送成功")
-            SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
-            
-            // 关闭页面
-            self.close()
-        }) { (_, error) in
+        }) { (error) in
             print(error)
-            // 提示发送失败
-            SVProgressHUD.showSuccess(withStatus: "发送失败")
-            SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
+            SVProgressHUD.showError(withStatus: "发送失败")
         }
+    }
+    
+    // MARK: - 工具条事件
+    
+    /// 切换图片选择器
+    func selectPicture() {
+        // 关闭键盘
+        textView.resignFirstResponder()
+        
+        // 调整图片选择器的高度
+        photoViewHeightCons?.constant = UIScreen.main.bounds.height * 0.6
     }
     
     /// 切换表情键盘
@@ -216,10 +245,13 @@ class ComposeViewController: UIViewController {
     lazy var toolbar:UIToolbar = UIToolbar()
     
     /// 表情键盘
-    lazy var emoticonKeyboradVC: EmoticonViewController = EmoticonViewController { [unowned self] (emoticon) in
+    private lazy var emoticonKeyboradVC: EmoticonViewController = EmoticonViewController { [unowned self] (emoticon) in
         self.textView.insertEmoticon(emoticon: emoticon)
         self.textViewDidChange(self.textView)
     }
+    
+    /// 图片选择器
+    private lazy var photoSelectorVC:PhotoSelectorController = PhotoSelectorController()
 
 }
 
