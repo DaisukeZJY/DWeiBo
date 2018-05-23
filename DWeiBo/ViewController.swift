@@ -13,12 +13,45 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(customLabel)
-        customLabel.xmg_AlignInner(type: XMG_AlignType.topLeft, referView: view, size: CGSize(width: UIScreen.main.bounds.width, height: 200), offset: CGPoint(x: 0, y: 200))
+        
+//        let start = CFAbsoluteTimeGetCurrent()
+//
+//        for i in 0..<10000{
+//            let person = TestPerson(dict: ["name":"daisuke" as AnyObject, "age":(2+i as AnyObject)])
+//            person.insertPerson()
+//        }
+//
+//        print("耗时：\(CFAbsoluteTimeGetCurrent() - start)")
+//        // 耗时：14.7124910354614
+        
+        
+        let start = CFAbsoluteTimeGetCurrent()
+        
+        for i in 0..<10000{
+            let person = TestPerson(dict: ["name":"daisuke" as AnyObject, "age":(2+i as AnyObject)])
+            person.insertQueuePerson()
+        }
+        
+        print("耗时：\(CFAbsoluteTimeGetCurrent() - start)")
+        // 耗时：0.696339964866638
         
         
         
-        customLabel.text = "这是我的博客地址：http://daisuke.cn 欢迎来这里看看，记住是这里：http://daisuke.cn"
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        view.addSubview(customLabel)
+//        customLabel.xmg_AlignInner(type: XMG_AlignType.topLeft, referView: view, size: CGSize(width: UIScreen.main.bounds.width, height: 200), offset: CGPoint(x: 0, y: 200))
+//
+//
+//
+//        customLabel.text = "这是我的博客地址：http://daisuke.cn 欢迎来这里看看，记住是这里：http://daisuke.cn"
         
         
         // Do any additional setup after loading the view, typically from a nib.
