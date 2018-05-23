@@ -118,6 +118,7 @@ class ComposeViewController: UIViewController {
     
     private func setupToolBar() {
         view.addSubview(toolbar)
+        view.addSubview(tipLabel)
         
 //        let tb = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
 //        tb.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
@@ -142,6 +143,8 @@ class ComposeViewController: UIViewController {
         let width = UIScreen.main.bounds.width
         let cons = toolbar.xmg_AlignInner(type: XMG_AlignType.bottomLeft, referView: view, size: CGSize(width: width, height: 44))
         toolbarBottomCons = toolbar.xmg_Constraint(cons, attribute: NSLayoutAttribute.bottom)
+        
+        tipLabel.xmg_AlignVertical(type: XMG_AlignType.topRight, referView: toolbar, size: nil, offset: CGPoint(x: -10, y: -10))
         
     }
     
@@ -244,6 +247,8 @@ class ComposeViewController: UIViewController {
     
     lazy var toolbar:UIToolbar = UIToolbar()
     
+    lazy var tipLabel: UILabel = UILabel()
+    
     /// 表情键盘
     private lazy var emoticonKeyboradVC: EmoticonViewController = EmoticonViewController { [unowned self] (emoticon) in
         self.textView.insertEmoticon(emoticon: emoticon)
@@ -255,10 +260,17 @@ class ComposeViewController: UIViewController {
 
 }
 
+private let maxTipLength = 10
 extension ComposeViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = textView.hasText
         navigationItem.rightBarButtonItem?.isEnabled = textView.hasText
+        
+        // 当已经输入的内容长度
+        let count = textView.emoticonAttributeText().count
+        let res = maxTipLength - count
+        tipLabel.textColor = (res > 0) ? UIColor.darkGray : UIColor.red
+        tipLabel.text = res == maxTipLength ? "" : "\(res)"
     }
 }

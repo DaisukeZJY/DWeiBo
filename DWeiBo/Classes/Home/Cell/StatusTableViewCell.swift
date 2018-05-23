@@ -44,7 +44,8 @@ class StatusTableViewCell: UITableViewCell {
         didSet{
             topView.status = status
             
-            contentLabel.text = status?.text
+//            contentLabel.text = status?.text
+            contentLabel.attributedText = EmoticonPackage.emoticonRegex(str: status?.text ?? "")
             
             // 设置配图数据
             pictureView.status = status?.retweeted_status != nil ? status?.retweeted_status : status
