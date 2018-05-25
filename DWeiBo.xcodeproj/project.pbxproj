@@ -10,6 +10,7 @@
 		666D135BBECA564A2D116B61 /* Pods_DWeiBo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0791998FA4302DCC0309F5CA /* Pods_DWeiBo.framework */; };
 		7E0D043C20A18582004B69F3 /* NewFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D043B20A18582004B69F3 /* NewFeatureViewController.swift */; };
 		7E0D043E20A1A1A2004B69F3 /* WelcomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */; };
+		7E83B46D20B7EB9400D9FE74 /* StatusDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83B46C20B7EB9400D9FE74 /* StatusDAO.swift */; };
 		7E8EF5E420AC220400F33A74 /* PhotoBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EF5E320AC220400F33A74 /* PhotoBrowserViewController.swift */; };
 		7E8EF5E620AC30B800F33A74 /* PhotoBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EF5E520AC30B800F33A74 /* PhotoBrowserCell.swift */; };
 		7E9CE38F20B268C8003B4D28 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9CE38E20B268C8003B4D28 /* PhotoSelectorController.swift */; };
@@ -83,6 +84,7 @@
 		69F92004D276B664EB3AE838 /* Pods_DWeiBoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DWeiBoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E0D043B20A18582004B69F3 /* NewFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeatureViewController.swift; sourceTree = "<group>"; };
 		7E0D043D20A1A1A2004B69F3 /* WelcomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomViewController.swift; sourceTree = "<group>"; };
+		7E83B46C20B7EB9400D9FE74 /* StatusDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDAO.swift; sourceTree = "<group>"; };
 		7E8EF5E320AC220400F33A74 /* PhotoBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserViewController.swift; sourceTree = "<group>"; };
 		7E8EF5E520AC30B800F33A74 /* PhotoBrowserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserCell.swift; sourceTree = "<group>"; };
 		7E9CE38E20B268C8003B4D28 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 			children = (
 				7EF7AE9320A53068004BB001 /* User.swift */,
 				7EF7AE9420A53068004BB001 /* Status.swift */,
+				7E83B46C20B7EB9400D9FE74 /* StatusDAO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				7EF2579D20B5570900B1B656 /* TestPerson.swift in Sources */,
 				7EF7AE9520A53069004BB001 /* StatusTableViewCell.swift in Sources */,
 				7EF7AE9C20A5309A004BB001 /* StatusNormalTableViewCell.swift in Sources */,
+				7E83B46D20B7EB9400D9FE74 /* StatusDAO.swift in Sources */,
 				7EC1B7041DC1A86100D39997 /* HomeTableViewController.swift in Sources */,
 				7E0D043C20A18582004B69F3 /* NewFeatureViewController.swift in Sources */,
 				7EF7AE9820A53069004BB001 /* StatusCellPictureView.swift in Sources */,

@@ -88,39 +88,64 @@ class Status: NSObject {
     
     /// 加载微博数据
     class func loadStatuses(since_id:Int, max_id:Int, finishBlock:@escaping (_ models:[Status]?, _ error:NSError?) ->()){
-        let path = "2/statuses/home_timeline.json"
-        var params = ["access_token":UserAccount.loadAccount()!.access_token]
         
-        // 下拉刷新
-        if since_id > 0 {
-            params["since_id"] = "\(since_id)"
-        }
-        
-        // 上拉刷新
-        if max_id > 0 {
-            params["max_id"] = "\(max_id - 1)"
-        }
-        
-        SVProgressHUD.show(withStatus: "loading...")
-        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
-        
-        NetworkTools.shareNetworkTools().get(path, parameters: params, progress: nil, success: { (_, json) in
-            if let dict = json as? [String: AnyObject]{
-                // 取出字典数组，转为model数组
-                let dictList = dict["statuses"] as! [[String: AnyObject]]
-                let models = dictToModel(list: dictList)
-                
-//                finishBlock(models, nil)
-                cacheStatusImages(list: models, finishBlock: finishBlock)
-                
-                SVProgressHUD.dismiss()
-                return
+        StatusDAO.loadStatuses(since_id: since_id, max_id: max_id) { (array, error) in
+            if array == nil {
+                finishBlock(nil, error! as NSError)
             }
-            SVProgressHUD.dismiss()
-        }) { (_, error) in
-            finishBlock(nil, error as NSError)
-            SVProgressHUD.dismiss()
+            if error != nil {
+                finishBlock(nil, error! as NSError)
+            }
+            
+            // 遍历数组,将字典转为模型
+            let models = dictToModel(list: array!)
+            
+            // 缓存微博配图
+            cacheStatusImages(list: models, finishBlock: finishBlock)
         }
+        
+//        let path = "2/statuses/home_timeline.json"
+//        var params = ["access_token":UserAccount.loadAccount()!.access_token]
+//
+//        StatusDAO.loadCacheStatuses(since_id: since_id, max_id: max_id) { (statuses) in
+//            let models = dictToModel(list: statuses)
+//            finishBlock(models, nil)
+//        }
+//
+//        // 下拉刷新
+//        if since_id > 0 {
+//            params["since_id"] = "\(since_id)"
+//        }
+//
+//        // 上拉刷新
+//        if max_id > 0 {
+//            params["max_id"] = "\(max_id - 1)"
+//        }
+//
+//        SVProgressHUD.show(withStatus: "loading...")
+//        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
+//
+//        NetworkTools.shareNetworkTools().get(path, parameters: params, progress: nil, success: { (_, json) in
+//            if let dict = json as? [String: AnyObject]{
+//
+//                // 缓存微博数据
+//                StatusDAO.cacheStatuses(statuses: dict["statuses"] as! [[String: AnyObject]])
+//
+//                // 取出字典数组，转为model数组
+//                let dictList = dict["statuses"] as! [[String: AnyObject]]
+//                let models = dictToModel(list: dictList)
+//
+////                finishBlock(models, nil)
+//                cacheStatusImages(list: models, finishBlock: finishBlock)
+//
+//                SVProgressHUD.dismiss()
+//                return
+//            }
+//            SVProgressHUD.dismiss()
+//        }) { (_, error) in
+//            finishBlock(nil, error as NSError)
+//            SVProgressHUD.dismiss()
+//        }
     }
     
     /// 将字典数组转模型数组

@@ -34,10 +34,10 @@ class SQLiteManager: NSObject {
     
     private func createTable() {
         // 1、编写SQL语句
-        let sql = "CREATE TABLE IF NOT EXISTS T_Person( \n" +
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
-            "name TEXT, \n" +
-            "age INTEGER \n" +
+        let sql = "CREATE TABLE IF NOT EXISTS T_Status( \n" +
+            "statusId INTEGER PRIMARY KEY, \n" +
+            "statusText TEXT, \n" +
+            "userId INTEGER \n" +
         "); \n"
         print(sql)
         
