@@ -17,25 +17,16 @@ class SQLiteManager: NSObject {
         return manager
     }
     
-    
-    var db: FMDatabase?
-    
+    // MARK: ==============================FMDatabaseQueue=======================================
+    var dbQueue:FMDatabaseQueue?
     /// 打开数据库
     func openDB(DBName:String){
         // 根据传入的数据库拼接数据库路径
         let path = DBName.docDir()
         
         // 创建数据库对象
-        db = FMDatabase(path: path)
-        
-        // 打开数据库
-        //         open方法特点：
-        //         1、如果指定路径对应的数据库文件已存在，就会直接打开
-        //         2、如果指定路径对应的数据库文件不存在，就会创建一个新的
-        if !db!.open() {
-            print("数据库打开失败")
-            return
-        }
+        // 注意点：如果是使用FMDatabaseQueue创建数据库对象，那么就不用打开数据库
+        dbQueue = FMDatabaseQueue(path: path)
         
         // 创建表
         createTable()
@@ -51,18 +42,58 @@ class SQLiteManager: NSObject {
         print(sql)
         
         // 执行SQL语句
-        // 注意点：在FMDB中除了查询以外，都称之为更新
-        if db!.executeUpdate(sql, withArgumentsIn: nil) {
-            print("创建表成功")
-        } else {
-            print("创建表失败")
-        }
+        dbQueue!.inDatabase({ (db) in
+            db?.executeUpdate(sql, withArgumentsIn: nil)
+        })
     }
+    
+    
+    // MARK: ==============================FMDatabase=======================================
+//    var db: FMDatabase?
+    
+//    /// 打开数据库
+//    func openDB(DBName:String){
+//        // 根据传入的数据库拼接数据库路径
+//        let path = DBName.docDir()
+//
+//        // 创建数据库对象
+//        db = FMDatabase(path: path)
+//
+//        // 打开数据库
+//        //         open方法特点：
+//        //         1、如果指定路径对应的数据库文件已存在，就会直接打开
+//        //         2、如果指定路径对应的数据库文件不存在，就会创建一个新的
+//        if !db!.open() {
+//            print("数据库打开失败")
+//            return
+//        }
+//
+//        // 创建表
+//        createTable()
+//    }
+//
+//    private func createTable() {
+//        // 1、编写SQL语句
+//        let sql = "CREATE TABLE IF NOT EXISTS T_Person( \n" +
+//            "id INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
+//            "name TEXT, \n" +
+//            "age INTEGER \n" +
+//        "); \n"
+//        print(sql)
+//
+//        // 执行SQL语句
+//        // 注意点：在FMDB中除了查询以外，都称之为更新
+//        if db!.executeUpdate(sql, withArgumentsIn: nil) {
+//            print("创建表成功")
+//        } else {
+//            print("创建表失败")
+//        }
+//    }
 
     
     
     
-    // MARK: ==============================分界线=======================================
+    // MARK: ==============================SQLite=======================================
     
 //    /// 创建一个串行队列
 //    private let dbQueue = DispatchQueue(label: "com.daisuke.test")

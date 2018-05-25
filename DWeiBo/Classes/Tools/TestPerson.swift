@@ -28,33 +28,73 @@ class TestPerson: NSObject {
         
     }
     
-    
-    class func loadPersons() ->[TestPerson]{
+    // MARK: ==============================FMDatabaseQueue=======================================
+    class func loadPersons(finished: @escaping ([TestPerson]) ->()){
         let sql = "SELECT * FROM T_Person;"
-        let res = SQLiteManager.share().db!.executeQuery(sql, withArgumentsIn: nil)
-        
-        var models = [TestPerson]()
-        while res!.next() {
-            let p = TestPerson()
-            let num = res?.int(forColumn: "id")
-            let name = res?.string(forColumn: "name")
-            let age = res?.int(forColumn: "age")
+        SQLiteManager.share().dbQueue?.inDatabase({ (db) in
+            let res = db?.executeQuery(sql, withArgumentsIn: nil)
             
-            p.id = Int(num!)
-            p.name = name
-            p.age = Int(age!)
-            models.append(p)
-        }
-        return models
+            var models = [TestPerson]()
+            while res!.next() {
+                let p = TestPerson()
+                let num = res!.int(forColumn: "id")
+                let name = res!.string(forColumn: "name")
+                let age = res!.int(forColumn: "age")
+                
+                p.id = Int(num)
+                p.name = name
+                p.age = Int(age)
+                models.append(p)
+            }
+            finished(models)
+        })
     }
     
     /// 插入一条记录
-    func insertQueuePerson() ->Bool{
+    func insertQueuePerson(){
         assert(name != nil, "name必须有值")
         let sql = "INSERT INTO T_Person (name, age) VALUES ('\(name!)', \(self.age));"
-        
-        return SQLiteManager.share().db!.executeUpdate(sql, withArgumentsIn: nil)
+        // 执行SQL语句
+        /*
+         只要在inTransaction闭包中执行的语句都是已经开启事务的
+         第一个参数：已经打开的数据库对象
+         第二个参数：用于设置是否需要回滚数据
+         */
+        SQLiteManager.share().dbQueue?.inTransaction({ (db, rollback) in
+            if !db!.executeUpdate(sql, withArgumentsIn: nil){
+                // 如果插入数据失败，就回滚
+                rollback?.pointee = true
+            }
+        })
     }
+    
+    // MARK: ==============================FMDatabase=======================================
+//    class func loadPersons() ->[TestPerson]{
+//        let sql = "SELECT * FROM T_Person;"
+//        let res = SQLiteManager.share().db!.executeQuery(sql, withArgumentsIn: nil)
+//
+//        var models = [TestPerson]()
+//        while res!.next() {
+//            let p = TestPerson()
+//            let num = res?.int(forColumn: "id")
+//            let name = res?.string(forColumn: "name")
+//            let age = res?.int(forColumn: "age")
+//
+//            p.id = Int(num!)
+//            p.name = name
+//            p.age = Int(age!)
+//            models.append(p)
+//        }
+//        return models
+//    }
+//
+//    /// 插入一条记录
+//    func insertQueuePerson() ->Bool{
+//        assert(name != nil, "name必须有值")
+//        let sql = "INSERT INTO T_Person (name, age) VALUES ('\(name!)', \(self.age));"
+//
+//        return SQLiteManager.share().db!.executeUpdate(sql, withArgumentsIn: nil)
+//    }
 
     
     
