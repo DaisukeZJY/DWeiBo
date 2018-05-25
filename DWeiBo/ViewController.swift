@@ -25,19 +25,45 @@ class ViewController: UIViewController {
 //        // 耗时：14.7124910354614
         
         
-        let start = CFAbsoluteTimeGetCurrent()
-        
-        for i in 0..<10000{
-            let person = TestPerson(dict: ["name":"daisuke" as AnyObject, "age":(2+i as AnyObject)])
-            person.insertQueuePerson()
-        }
-        
-        print("耗时：\(CFAbsoluteTimeGetCurrent() - start)")
+//        let start = CFAbsoluteTimeGetCurrent()
+//
+//        let manager = SQLiteManager.share()
+//        // 开启事务
+//        manager.beginTransaction()
+//
+//        for i in 0..<10000{
+//            let person = TestPerson(dict: ["name":"daisuke" as AnyObject, "age":(2+i as AnyObject)])
+//            person.insertQueuePerson()
+//            if i == 1000 {
+//                manager.rollbackTransaction()
+//                // 注意点：回滚之后一定要跳出循环停止更新
+//                return
+//            }
+//        }
+//
+//        // 提交事务
+//        manager.commitTransaction()
+//
+//        print("耗时：\(CFAbsoluteTimeGetCurrent() - start)")
         // 耗时：0.696339964866638
         
         
         
+        let start = CFAbsoluteTimeGetCurrent()
         
+        let manager = SQLiteManager.share()
+        // 开启事务
+        manager.beginTransaction()
+        
+        for i in 0..<10000{
+            let sql = "INSERT INTO T_Person (name, age) VALUES (?, ?);"
+            manager.batchExecSQL(sql: sql, args: "yy + \(i)", 1+i)
+        }
+        
+        // 提交事务
+        manager.commitTransaction()
+        
+        print("耗时：\(CFAbsoluteTimeGetCurrent() - start)")
         
         
         
