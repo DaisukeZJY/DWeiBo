@@ -49,21 +49,21 @@ class ViewController: UIViewController {
         
         
         
-        let start = CFAbsoluteTimeGetCurrent()
-        
-        let manager = SQLiteManager.share()
-        // 开启事务
-        manager.beginTransaction()
-        
-        for i in 0..<10000{
-            let sql = "INSERT INTO T_Person (name, age) VALUES (?, ?);"
-            manager.batchExecSQL(sql: sql, args: "yy + \(i)", 1+i)
-        }
-        
-        // 提交事务
-        manager.commitTransaction()
-        
-        print("耗时：\(CFAbsoluteTimeGetCurrent() - start)")
+//        let start = CFAbsoluteTimeGetCurrent()
+//        
+//        let manager = SQLiteManager.share()
+//        // 开启事务
+//        manager.beginTransaction()
+//        
+//        for i in 0..<10000{
+//            let sql = "INSERT INTO T_Person (name, age) VALUES (?, ?);"
+//            manager.batchExecSQL(sql: sql, args: "yy + \(i)", 1+i)
+//        }
+//        
+//        // 提交事务
+//        manager.commitTransaction()
+//        
+//        print("耗时：\(CFAbsoluteTimeGetCurrent() - start)")
         
         
         

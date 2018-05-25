@@ -10,5 +10,5 @@ target 'DWeiBo' do
   pod 'MJRefresh'
   pod 'SDWebImage'
   pod 'SVProgressHUD'
-
+  pod 'FMDB'
 end

@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // 打开数据库，创建表格
-        SQLiteManager.share().openDB(SQLiteName: "person.sqlite")
+//        SQLiteManager.share().openDB(SQLiteName: "person.sqlite")
         
         // 注册通知
         NotificationCenter.default.addObserver(self, selector: #selector(switchRootViewController(notify:)), name: NSNotification.Name(rawValue: kSwitchRootViewControllerKey), object: nil)
