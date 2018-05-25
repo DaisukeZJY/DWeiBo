@@ -169,8 +169,8 @@ class MainViewController: UITabBarController {
     func composeBtnClick() {
         print(#function)
         print("点击按钮")
-//        let composeVC = ComposeViewController()
-        let composeVC = ViewController()
+        let composeVC = ComposeViewController()
+//        let composeVC = ViewController()
         let nav = UINavigationController(rootViewController: composeVC)
         present(nav, animated: true, completion: nil)
         
